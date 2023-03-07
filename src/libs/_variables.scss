@@ -1,3 +1,28 @@
 /* COLORS */
 
 /* MIXIN */
+
+@mixin f300 {
+  font-family: "Shantell Sans", cursive;
+  font-weight: 300;
+}
+
+@mixin f500 {
+  font-family: "Shantell Sans", cursive;
+  font-weight: 500;
+}
+
+@mixin f600 {
+  font-family: "Shantell Sans", cursive;
+  font-weight: 600;
+}
+
+@mixin f700 {
+  font-family: "Shantell Sans", cursive;
+  font-weight: 700;
+}
+
+@mixin f800 {
+  font-family: "Shantell Sans", cursive;
+  font-weight: 800;
+}

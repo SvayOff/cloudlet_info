@@ -1,9 +1,12 @@
 import React from 'react';
 import './libs/style.scss';
 
-const App = () => {
+import Home from './pages/Home';
+
+const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="wrapper">
+      <Home />
     </div>
   );
 }
