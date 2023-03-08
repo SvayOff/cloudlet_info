@@ -106,7 +106,7 @@
   }
 }
 
-// weather
+// weather, today, information
 .weather {
   width: 100%;
   @include shadow;
@@ -118,6 +118,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 20px;
   }
 }
 .today {
@@ -266,6 +267,65 @@
       svg {
         width: 25px;
         margin-right: 15px;
+      }
+      span {
+        & > span {
+          display: inline-block;
+          font-size: 12px;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+.week {
+  @include borderDark;
+  @include shadow;
+  border-radius: 30px;
+  padding: 20px;
+  &__title {
+    margin-bottom: 10px;
+  }
+  &-items {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    @include shadow;
+    @include borderDark;
+    min-width: 140px;
+    width: 100%;
+    border-radius: 30px;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    &-day {
+      @include f400;
+      margin-bottom: 5px;
+    }
+    &-img {
+      max-width: 60px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 5px;
+    }
+    &-desc {
+      margin-bottom: 10px;
+    }
+    &-temp {
+      display: flex;
+    }
+    &-max,
+    &-min {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      flex-direction: column;
+      svg {
+        width: 20px;
       }
     }
   }
