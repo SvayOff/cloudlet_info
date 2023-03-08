@@ -1,6 +1,7 @@
 import React from "react";
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
+import Weather from '../components/Weather';
 
 const Home: React.FC = () => {
   return (
@@ -11,7 +12,9 @@ const Home: React.FC = () => {
 
         <main className='content__block'>
 
-          <Navigation/>
+          <Navigation />
+
+          <Weather />
 
         </main>
 
