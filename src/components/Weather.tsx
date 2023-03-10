@@ -4,10 +4,10 @@ import Week from './Week';
 
 const Weather: React.FC = () => {
   return (
-    <div className="weather">
+    <section className="weather">
       <WeatherTop />
       <Week />
-    </div>
+    </section>
   );
 };
 

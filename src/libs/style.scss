@@ -114,7 +114,7 @@
     }
   }
 
-  &__login {
+  &__signin {
     @include borderDark;
     border-radius: 30px;
     padding: 5px 10px;
@@ -146,6 +146,7 @@
 
 // navigation
 .navigation {
+  margin-right: 30px;
   &__list {
     display: flex;
     flex-direction: column;
@@ -196,7 +197,6 @@
   width: 100%;
   @include shadow;
   @include borderDark;
-  margin-left: 30px;
   border-radius: 30px;
   padding: 20px;
   &__top {
@@ -426,6 +426,116 @@
       svg {
         width: 20px;
       }
+    }
+  }
+}
+
+// login
+.login {
+  width: 100%;
+  @include shadow;
+  @include borderDark;
+  border-radius: 30px;
+  padding: 20px;
+  &__title {
+    text-transform: uppercase;
+    font-size: 48px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__form {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 18px;
+    &-block {
+      position: relative;
+      margin-top: 35px;
+    }
+    &-title {
+      position: absolute;
+      display: block;
+      pointer-events: none;
+      margin-bottom: 5px;
+      left: 32px;
+      top: 6px;
+      transition: all 0.3s ease;
+      padding: 0 5px;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
+    }
+    &-input {
+      width: 100%;
+      padding: 7px 0;
+      border: none;
+      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.7);
+      margin-bottom: 10px;
+      padding-left: 35px;
+      outline: none;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      &:focus ~ span,
+      &:valid ~ span {
+        top: -25px;
+        left: 0;
+        border-left: 1px solid rgba($color: #000000, $alpha: 0.7);
+        border-right: 1px solid rgba($color: #000000, $alpha: 0.7);
+        padding: 0 5px;
+      }
+    }
+    &-btn {
+      padding: 10px;
+      @include borderDark;
+      border-radius: 30px;
+      background-color: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 15px 0 10px;
+      &:hover {
+        background-color: #fff;
+        transform: rotateZ(20deg);
+      }
+    }
+    &-reg {
+      font-size: 16px;
+    }
+    &-link {
+      position: relative;
+      transition: color 0.3s ease;
+      &:hover {
+        color: rgba($color: #000000, $alpha: 0.7);
+        &::before {
+          width: 100%;
+          background-color: rgba($color: #000000, $alpha: 0.5);
+        }
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        width: 40%;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #000;
+        transition: all 0.3s ease;
+      }
+    }
+    svg {
+      position: absolute;
+      transition: all 0.3s ease;
+      width: 20px;
+      top: 7px;
+      left: 7px;
+    }
+    path {
+      fill: rgba($color: #000000, $alpha: 0.7);
+    }
+    .icon-pass {
+      transform: scale(0.7);
+      left: 2px;
+      top: 2px;
+      width: 28px;
     }
   }
 }

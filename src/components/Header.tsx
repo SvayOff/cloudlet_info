@@ -10,8 +10,8 @@ const Header: React.FC = () => {
 
         <Search />
 
-        <a className="header__login" href="#">
-          Login
+        <a className="header__signin" href="#">
+          Sign In
         </a>
 
         <a className="header__account" href="#">
