@@ -5,6 +5,7 @@ import Weather from '../components/Weather';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import Favorites from '../components/Favorites';
+import Error from '../components/Error';
 
 const Home: React.FC = () => {
   return (
@@ -23,6 +24,8 @@ const Home: React.FC = () => {
             {/* <Register /> */}
 
             {/* <Favorites /> */}
+
+            <Error />
           </main>
         </div>
       </div>

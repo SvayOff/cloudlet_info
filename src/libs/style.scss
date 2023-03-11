@@ -626,6 +626,60 @@
   }
 }
 
+// error
+.error {
+  @include borderDark;
+  @include shadow;
+  width: 100%;
+  border-radius: 30px;
+  padding: 20px;
+  text-align: center;
+  &:hover {
+    .error__images {
+      transform: rotateY(360deg) scale(0.9);
+    }
+    .error__desc {
+      transform: translateY(-20px) scale(0.8);
+    }
+  }
+  &__images {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    transition: all 2s ease;
+  }
+  &__image {
+    width: 100%;
+  }
+  svg {
+    position: absolute;
+    width: 100px;
+    right: 5px;
+    top: 10px;
+  }
+  &__desc {
+    font-size: 36px;
+    @include f800;
+    max-width: 500px;
+    margin: 0 auto;
+    text-transform: uppercase;
+    transform: translateY(-20px);
+    transition: all 2s ease;
+  }
+  &__btn {
+    @include borderDark;
+    padding: 10px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #fff;
+      transform: rotateZ(20deg);
+    }
+  }
+}
+
 // other
 .title {
   font-size: 21px;
