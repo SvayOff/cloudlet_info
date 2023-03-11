@@ -17,7 +17,7 @@ const Home: React.FC = () => {
           <main className="content__block">
             <Navigation />
 
-            {/* <Weather /> */}
+            <Weather />
 
             {/* <Login /> */}
 
@@ -25,7 +25,7 @@ const Home: React.FC = () => {
 
             {/* <Favorites /> */}
 
-            <Error />
+            {/* <Error /> */}
           </main>
         </div>
       </div>

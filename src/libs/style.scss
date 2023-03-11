@@ -156,6 +156,7 @@
     align-items: center;
     @include borderDark;
     @include shadow;
+    margin-bottom: 20px;
     &-item {
       width: 40px;
       height: 40px;
@@ -187,6 +188,67 @@
       }
       .map_img {
         transform: scale(1.1);
+      }
+    }
+  }
+  &__other {
+    @include borderDark;
+    border-radius: 30px;
+    padding: 20px 10px;
+  }
+  &__theme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    @include borderDark;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+    cursor: pointer;
+    &:hover {
+      background-color: #fff;
+      transform: rotateZ(20deg);
+    }
+    &-img {
+      width: 30px;
+    }
+  }
+  &__lang {
+    &-active {
+      width: 40px;
+      height: 40px;
+      @include borderDark;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    &-item {
+      width: 40px;
+      height: 40px;
+      @include borderDark;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      transform: scale(0.8);
+    }
+    &-img {
+      background-position: center;
+      object-fit: cover;
+      width: 70px;
+      transform: translateX(-16px) translateY(-16px);
+      padding: 0;
+    }
+    &-list {
+      display: none;
+    }
+    &.show {
+      .navigation__lang-list {
+        display: block;
       }
     }
   }
