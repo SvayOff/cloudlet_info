@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation';
 import Weather from '../components/Weather';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import Favorites from '../components/Favorites';
 
 const Home: React.FC = () => {
   return (
@@ -19,7 +20,9 @@ const Home: React.FC = () => {
 
             {/* <Login /> */}
 
-            <Register />
+            {/* <Register /> */}
+
+            {/* <Favorites /> */}
           </main>
         </div>
       </div>

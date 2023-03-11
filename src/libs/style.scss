@@ -192,7 +192,7 @@
   }
 }
 
-// weather, today, information
+// weather, today, information, week
 .weather {
   width: 100%;
   @include shadow;
@@ -430,7 +430,7 @@
   }
 }
 
-// login
+// login & register
 .login,
 .register {
   width: 100%;
@@ -546,6 +546,81 @@
     .icon-email {
       path {
         fill: none;
+      }
+    }
+  }
+}
+
+// favorites
+.favorites {
+  width: 100%;
+  @include shadow;
+  @include borderDark;
+  border-radius: 30px;
+  padding: 20px;
+  &__title {
+    margin-bottom: 10px;
+  }
+  &__box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    @include shadow;
+    @include borderDark;
+    min-width: 140px;
+    width: 100%;
+    border-radius: 30px;
+    text-align: center;
+    padding: 15px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #fff;
+      transform: scale(0.95);
+    }
+    &-title {
+      margin-bottom: 5px;
+    }
+    &-img {
+      max-width: 60px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 5px;
+    }
+    &-desc {
+      margin-bottom: 10px;
+    }
+    &-temp {
+      display: flex;
+      margin-bottom: 10px;
+      flex: 1;
+    }
+
+    &-max,
+    &-min {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      flex-direction: column;
+      svg {
+        width: 20px;
+      }
+    }
+    &-max {
+      margin-right: 10px;
+    }
+    &-btn {
+      padding: 5px 10px;
+      border-radius: 30px;
+      @include borderDark;
+      cursor: pointer;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.1);
       }
     }
   }
