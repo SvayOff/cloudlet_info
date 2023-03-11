@@ -431,7 +431,8 @@
 }
 
 // login
-.login {
+.login,
+.register {
   width: 100%;
   @include shadow;
   @include borderDark;
@@ -531,11 +532,21 @@
     path {
       fill: rgba($color: #000000, $alpha: 0.7);
     }
+    .icon-log {
+      path {
+        stroke-width: 0.5px;
+      }
+    }
     .icon-pass {
       transform: scale(0.7);
       left: 2px;
       top: 2px;
       width: 28px;
+    }
+    .icon-email {
+      path {
+        fill: none;
+      }
     }
   }
 }

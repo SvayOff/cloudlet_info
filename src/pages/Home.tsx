@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Navigation from '../components/Navigation';
 import Weather from '../components/Weather';
 import Login from '../components/Login';
+import Register from '../components/Register';
 
 const Home: React.FC = () => {
   return (
@@ -16,7 +17,9 @@ const Home: React.FC = () => {
 
             {/* <Weather /> */}
 
-            <Login />
+            {/* <Login /> */}
+
+            <Register />
           </main>
         </div>
       </div>
