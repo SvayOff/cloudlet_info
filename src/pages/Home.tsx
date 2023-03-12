@@ -6,6 +6,7 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import Favorites from '../components/Favorites';
 import Error from '../components/Error';
+import DayFull from '../components/DayFull';
 
 const Home: React.FC = () => {
   return (
@@ -26,6 +27,8 @@ const Home: React.FC = () => {
             {/* <Favorites /> */}
 
             {/* <Error /> */}
+
+            {/* <DayFull /> */}
           </main>
         </div>
       </div>

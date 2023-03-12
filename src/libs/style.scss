@@ -360,6 +360,7 @@
     width: 100%;
     @include shadow;
     @include borderDark;
+    cursor: default;
     transition: all 0.3s ease;
     &:hover {
       background-color: #fff;
@@ -430,6 +431,22 @@
           font-size: 12px;
           transform: translateY(-2px);
         }
+      }
+    }
+    &-direction {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      svg {
+        width: 25px;
+        margin-right: 15px;
+      }
+    }
+    &-speed {
+      display: flex;
+      align-items: center;
+      svg {
+        margin-right: 15px;
       }
     }
   }
@@ -739,6 +756,69 @@
       background-color: #fff;
       transform: rotateZ(20deg);
     }
+  }
+}
+
+// dayfull
+.dayfull {
+  @include borderDark;
+  @include shadow;
+  width: 100%;
+  border-radius: 30px;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+  &__inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  &__how {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__desc {
+    margin-right: 20px;
+    min-width: max-content;
+    text-align: center;
+    font-size: 18px;
+    @include f500;
+  }
+  &__degree {
+    font-size: 48px;
+    & > span {
+      display: inline-block;
+      font-size: 18px;
+      transform: translateY(-18px);
+    }
+  }
+  &__img {
+    max-width: 200px;
+    width: 100%;
+    margin-right: 25px;
+  }
+  &__info {
+    text-align: center;
+  }
+  &__city {
+    font-size: 48px;
+  }
+  &__data {
+    font-size: 24px;
+  }
+  &__time {
+    position: relative;
+    text-align: center;
+    time {
+      margin-left: 10px;
+    }
+  }
+  &__cols {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
 }
 
