@@ -7,6 +7,7 @@ import Register from '../components/Register';
 import Favorites from '../components/Favorites';
 import Error from '../components/Error';
 import DayFull from '../components/DayFull';
+import Maps from '../components/Maps';
 
 const Home: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ const Home: React.FC = () => {
           <main className="content__block">
             <Navigation />
 
-            <Weather />
+            {/* <Weather /> */}
 
             {/* <Login /> */}
 
@@ -29,6 +30,8 @@ const Home: React.FC = () => {
             {/* <Error /> */}
 
             {/* <DayFull /> */}
+
+            <Maps />
           </main>
         </div>
       </div>
