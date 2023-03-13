@@ -8,6 +8,7 @@ import Favorites from '../components/Favorites';
 import Error from '../components/Error';
 import DayFull from '../components/DayFull';
 import Maps from '../components/Maps';
+import Empty from '../components/Empty';
 
 const Home: React.FC = () => {
   return (
@@ -31,7 +32,9 @@ const Home: React.FC = () => {
 
             {/* <DayFull /> */}
 
-            <Maps />
+            {/* <Maps /> */}
+
+            <Empty />
           </main>
         </div>
       </div>
