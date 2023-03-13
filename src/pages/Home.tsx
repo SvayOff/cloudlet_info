@@ -20,7 +20,7 @@ const Home: React.FC = () => {
           <main className="content__block">
             <Navigation />
 
-            {/* <Weather /> */}
+            <Weather />
 
             {/* <Login /> */}
 
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
 
             {/* <Maps /> */}
 
-            <Empty />
+            {/* <Empty /> */}
           </main>
         </div>
       </div>

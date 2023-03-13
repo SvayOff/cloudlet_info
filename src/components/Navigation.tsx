@@ -5,7 +5,7 @@ const Navigation: React.FC = () => {
     <section className="navigation">
       <nav className="navigation__inner">
         <ul className="navigation__list">
-          <li className="navigation__list-item">
+          <li className="navigation__list-item navigation__list-home">
             <a href="#">
               <svg
                 className="navigation__item-img home-img"
@@ -16,7 +16,7 @@ const Navigation: React.FC = () => {
               </svg>
             </a>
           </li>
-          <li className="navigation__list-item">
+          <li className="navigation__list-item navigation__list-maps">
             <a href="#">
               <svg className="navigation__item-img map_img" height={24} width={24}>
                 <g style={{ display: 'inline' }}>
@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
               </svg>
             </a>
           </li>
-          <li className="navigation__list-item">
+          <li className="navigation__list-item navigation__list-favorite">
             <a href="#">
               <svg className="navigation__item-img favourite-img" height={24} width={24}>
                 <title />
