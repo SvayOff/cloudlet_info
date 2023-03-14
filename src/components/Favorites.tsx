@@ -5,7 +5,7 @@ const Favorites: React.FC = () => {
     <section className="favorites">
       <h2 className="favorites__title title">Favorites</h2>
       <div className="favorites__box">
-        <div className="favorites__item">
+        <a href="#" className="favorites__item">
           <h3 className="favorites__item-title">Kiev</h3>
           <img className="favorites__item-img" src="/images/icons/cloud_wind.svg" alt="wind" />
           <p className="favorites__item-desc">Windy</p>
@@ -55,8 +55,8 @@ const Favorites: React.FC = () => {
             </div>
           </div>
           <button className="favorites__item-btn">Remove From Favorites</button>
-        </div>
-        <div className="favorites__item">
+        </a>
+        <a href="#" className="favorites__item">
           <h3 className="favorites__item-title">Ternopil</h3>
           <img className="favorites__item-img" src="/images/icons/cloud_rain.svg" alt="wind" />
           <p className="favorites__item-desc">Rainy</p>
@@ -106,8 +106,8 @@ const Favorites: React.FC = () => {
             </div>
           </div>
           <button className="favorites__item-btn">Remove From Favorites</button>
-        </div>
-        <div className="favorites__item">
+        </a>
+        <a href="#" className="favorites__item">
           <h3 className="favorites__item-title">Lviv</h3>
           <img className="favorites__item-img" src="/images/icons/cloud_sun.svg" alt="wind" />
           <p className="favorites__item-desc">Sunny</p>
@@ -157,7 +157,7 @@ const Favorites: React.FC = () => {
             </div>
           </div>
           <button className="favorites__item-btn">Remove From Favorites</button>
-        </div>
+        </a>
       </div>
     </section>
   );

@@ -233,7 +233,7 @@
     &-maps {
       a {
         margin-top: 7px;
-        margin-left: 8.5px;
+        margin-left: 7.5px;
       }
     }
     &-favorite {
@@ -548,7 +548,7 @@
     flex-direction: column;
     @include shadow;
     @include borderDark;
-    min-width: 140px;
+    max-width: 140px;
     width: 100%;
     border-radius: 30px;
     text-align: center;
@@ -722,7 +722,7 @@
   &__box {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 20px;
   }
   &__item {
     display: flex;
@@ -973,7 +973,6 @@
   }
   &__decor {
     position: absolute;
-
     path {
       fill: #ffed09;
       stroke: #ffcf48;
@@ -1013,7 +1012,7 @@
   }
   50% {
     transform: scale(1.2);
-    left: 50px;
+    left: 30px;
     top: 0px;
   }
   to {

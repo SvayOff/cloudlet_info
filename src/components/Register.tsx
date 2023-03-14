@@ -3,11 +3,11 @@ import React from 'react';
 const Register: React.FC = () => {
   return (
     <section className="register">
-      <div className="register__title">Registration</div>
+      <div className="register__title">Register</div>
       <form className="register__form">
         <div className="register__form-block">
           <input className="register__form-input register__form-log" type="text" required />
-          <span className="register__form-title">Create Your Login</span>
+          <span className="register__form-title">Create Login</span>
           <svg
             className="register__form-icon icon-log"
             viewBox="0 0 32 32"
@@ -23,7 +23,7 @@ const Register: React.FC = () => {
         </div>
         <div className="register__form-block">
           <input className="register__form-input" type="password" required />
-          <span className="register__form-title">Create Your Password</span>
+          <span className="register__form-title">Create Password</span>
           <svg
             className="register__form-icon icon-pass"
             height={32}
@@ -38,7 +38,7 @@ const Register: React.FC = () => {
         </div>
         <div className="register__form-block">
           <input className="register__form-input" type="text" required />
-          <span className="register__form-title">Create Your Email</span>
+          <span className="register__form-title">Create Email</span>
           <svg
             className="register__form-icon icon-email"
             viewBox="0 0 32 32"

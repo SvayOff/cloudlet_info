@@ -14,7 +14,7 @@ const Maps: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"></a>
       </div>
-      <div className="map sunshine">
+      <div className="maps__map sunshine">
         <h2 className="maps__title title">Sunshine</h2>
         <iframe
           src="https://www.meteoblue.com/en/weather/maps/widget?windAnimation=0&gust=0&satellite=0&cloudsAndPrecipitation=0&temperature=0&sunshine=0&sunshine=1&extremeForecastIndex=0&geoloc=detect&tempunit=C&windunit=km%252Fh&lengthunit=metric&zoom=5&autowidth=auto"
@@ -24,7 +24,7 @@ const Maps: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"></a>
       </div>
-      <div className="map temperature">
+      <div className="maps__map temperature">
         <h2 className="maps__title title">Temperature</h2>
         <iframe
           src="https://www.meteoblue.com/en/weather/maps/widget?windAnimation=0&gust=0&satellite=0&cloudsAndPrecipitation=0&temperature=0&temperature=1&sunshine=0&extremeForecastIndex=0&geoloc=detect&tempunit=C&windunit=km%252Fh&lengthunit=metric&zoom=5&autowidth=auto"
