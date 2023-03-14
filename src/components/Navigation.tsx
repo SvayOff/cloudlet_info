@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Navigation: React.FC = () => {
   return (
@@ -6,7 +7,7 @@ const Navigation: React.FC = () => {
       <nav className="navigation__inner">
         <ul className="navigation__list">
           <li className="navigation__list-item navigation__list-home">
-            <a href="#">
+            <NavLink to="/weather">
               <svg
                 className="navigation__item-img home-img"
                 height={16}
@@ -14,10 +15,10 @@ const Navigation: React.FC = () => {
                 xmlSpace="preserve">
                 <path d="M15.45 7 14 5.551V2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v.553L9 .555C8.727.297 8.477 0 8 0s-.727.297-1 .555L.55 7C.238 7.325 0 7.562 0 8c0 .563.432 1 1 1h1v6c0 .55.45 1 1 1h3v-5c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v5h3c.55 0 1-.45 1-1V9h1c.568 0 1-.437 1-1 0-.438-.238-.675-.55-1z" />
               </svg>
-            </a>
+            </NavLink>
           </li>
           <li className="navigation__list-item navigation__list-maps">
-            <a href="#">
+            <NavLink to="/maps">
               <svg className="navigation__item-img map_img" height={24} width={24}>
                 <g style={{ display: 'inline' }}>
                   <path
@@ -30,10 +31,10 @@ const Navigation: React.FC = () => {
                   />
                 </g>
               </svg>
-            </a>
+            </NavLink>
           </li>
           <li className="navigation__list-item navigation__list-favorite">
-            <a href="#">
+            <NavLink to="/favorites">
               <svg className="navigation__item-img favourite-img" height={24} width={24}>
                 <title />
                 <g
@@ -47,7 +48,7 @@ const Navigation: React.FC = () => {
                   <path d="m17.5 22.5-8-6.5-8 6.5v-20h16M18 7v10m5-5H13" />
                 </g>
               </svg>
-            </a>
+            </NavLink>
           </li>
         </ul>
         <div className="navigation__other">

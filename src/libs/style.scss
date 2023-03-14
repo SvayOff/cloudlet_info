@@ -37,6 +37,7 @@
     position: relative;
     font-size: 22px;
     @include f500;
+
     &:hover {
       .header__logo-img {
         top: -5px;

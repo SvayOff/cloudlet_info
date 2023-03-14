@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Login: React.FC = () => {
   return (
@@ -41,9 +42,9 @@ const Login: React.FC = () => {
         </button>
         <p className="login__form-reg">
           Don't have an account?{' '}
-          <a className="login__form-link" href="#">
+          <NavLink className="login__form-link" to="/register">
             Register
-          </a>
+          </NavLink>
           !
         </p>
       </form>

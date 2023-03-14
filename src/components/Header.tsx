@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Logo from './Logo';
 import Search from './Search';
 
@@ -10,9 +11,9 @@ const Header: React.FC = () => {
 
         <Search />
 
-        <a className="header__signin" href="#">
+        <NavLink className="header__signin" to="/login">
           Sign In
-        </a>
+        </NavLink>
 
         <a className="header__account" href="#">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">

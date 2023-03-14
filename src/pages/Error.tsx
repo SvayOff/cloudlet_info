@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Error: React.FC = () => {
   return (
@@ -53,9 +54,9 @@ const Error: React.FC = () => {
         </svg>
       </div>
       <p className="error__desc">Something went wrong. Try later!</p>
-      <a className="error__btn" href="#">
+      <NavLink className="error__btn" to="/weather">
         Go Back
-      </a>
+      </NavLink>
     </section>
   );
 };

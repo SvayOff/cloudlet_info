@@ -1,8 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const WeatherToday: React.FC = () => {
   return (
-    <div className="weather__today today">
+    <NavLink className="weather__today today" to="/dayfull">
       <div className="today-about">
         <div className="today-time">
           Today
@@ -34,7 +35,7 @@ const WeatherToday: React.FC = () => {
           </g>
         </svg>
       </button>
-    </div>
+    </NavLink>
   );
 };
 

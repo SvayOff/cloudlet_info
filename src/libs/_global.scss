@@ -79,6 +79,13 @@ textarea {
     overflow: auto;
 }
 
+a,
+svg,
+img,
+div {
+    -webkit-tap-highlight-color: transparent;
+}
+
 [type="checkbox"],
 [type="radio"] {
     box-sizing: border-box;
