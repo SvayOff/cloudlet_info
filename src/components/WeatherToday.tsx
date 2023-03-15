@@ -1,26 +1,39 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { NavLink } from 'react-router-dom';
 
 const WeatherToday: React.FC = () => {
+  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+
+  const weatherTodayCity = weatherToday && weatherToday.name;
+  const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);
+  const weatherTodaySky = weatherToday && weatherToday.weather[0].main;
+  const weatherTodayHours = new Date().getHours();
+  const weatherTodayMinutes = new Date().getMinutes();
+  const weatherTodayDay = new Date().getDate();
+
   return (
     <NavLink className="weather__today today" to="/dayfull">
       <div className="today-about">
         <div className="today-time">
           Today
-          <time>06:20 PM</time>
+          <time>
+            {weatherTodayHours}.{weatherTodayMinutes}
+          </time>
         </div>
         <div className="today-info">
-          <p className="today-city">Kyiv</p>
-          <time className="today-data">Monday, 10 March</time>
+          <p className="today-city">{weatherTodayCity}</p>
+          <time className="today-data">Monday, {weatherTodayDay} March</time>
         </div>
       </div>
       <div className="today-how">
         <div className="today-desc">
           <span className="today-degree">
-            10
+            {weatherTodayTemp}
             <span>°C</span>
           </span>
-          <p className="today-sky">Rainy</p>
+          <p className="today-sky">{weatherTodaySky}</p>
         </div>
         <img className="today-img" src="/images/icons/cloud_rain.svg" alt="rain" />
       </div>

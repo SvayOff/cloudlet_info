@@ -1,6 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+
 
 const TempCol: React.FC = () => {
+  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+
+  const weatherTodayTempMax = weatherToday && Math.round(weatherToday.main.temp_max);
+  const weatherTodayTempMin = weatherToday && Math.round(weatherToday.main.temp_min);
+
   return (
     <div className="information__col information__col-temp temp">
       <h2 className="information__col-title">Temp (Max & Min)</h2>
@@ -25,7 +33,8 @@ const TempCol: React.FC = () => {
           />
         </svg>
         <span>
-          22<span>°C</span>
+          {weatherTodayTempMax}
+          <span>°C</span>
         </span>
       </div>
       <div className="information__col-min">
@@ -44,7 +53,8 @@ const TempCol: React.FC = () => {
           </g>
         </svg>
         <span>
-          7<span>°C</span>
+          {weatherTodayTempMin}
+          <span>°C</span>
         </span>
       </div>
     </div>

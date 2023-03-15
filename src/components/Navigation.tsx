@@ -7,7 +7,7 @@ const Navigation: React.FC = () => {
       <nav className="navigation__inner">
         <ul className="navigation__list">
           <li className="navigation__list-item navigation__list-home">
-            <NavLink to="/weather">
+            <NavLink to="/">
               <svg
                 className="navigation__item-img home-img"
                 height={16}

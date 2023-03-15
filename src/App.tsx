@@ -1,6 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './libs/style.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 import HomeLayout from './layouts/HomeLayout';
 import Weather from './pages/Weather';
 import DayFull from './pages/DayFull';
@@ -18,23 +20,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Empty />,
+        element: <Weather />,
       },
       {
         path: '/dayfull',
         element: <DayFull />,
-      },
-      {
-        path: 'weather',
-        element: <Weather />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'register',
-        element: <Register />,
       },
       {
         path: 'maps',
@@ -43,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'favorites',
         element: <Favorites />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
       },
       {
         path: '*',
