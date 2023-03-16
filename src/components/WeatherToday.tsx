@@ -3,15 +3,58 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { NavLink } from 'react-router-dom';
 
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'Novermber',
+  'December',
+];
+
 const WeatherToday: React.FC = () => {
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
 
   const weatherTodayCity = weatherToday && weatherToday.name;
   const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);
   const weatherTodaySky = weatherToday && weatherToday.weather[0].main;
-  const weatherTodayHours = new Date().getHours();
-  const weatherTodayMinutes = new Date().getMinutes();
+  const weatherTodayHours =
+    new Date().getHours() < 10 ? `0${new Date().getHours()}` : new Date().getHours();
+  const weatherTodayMinutes =
+    new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : new Date().getMinutes();
   const weatherTodayDay = new Date().getDate();
+  const weatherTodayDayName =
+    weatherToday && days.filter((day, index) => (index === new Date().getDay() - 1 ? day : null));
+  const weatherTodayMonth =
+    weatherToday &&
+    months.filter((month, index) => (index === new Date().getMonth() ? month : null));
+
+  const weatherTodayImage = () => {
+    switch (weatherTodaySky) {
+      case 'Clouds':
+        return 'cloud';
+        break;
+      case 'Clear':
+        return 'cloud_sun';
+        break;
+      case 'Snow':
+        return 'cloud_snow';
+        break;
+      case 'Rain':
+        return 'cloud_rain';
+        break;
+      case 'Thunderstorm':
+        return 'cloud_thunder';
+        break;
+    }
+  };
 
   return (
     <NavLink className="weather__today today" to="/dayfull">
@@ -19,12 +62,14 @@ const WeatherToday: React.FC = () => {
         <div className="today-time">
           Today
           <time>
-            {weatherTodayHours}.{weatherTodayMinutes}
+            Time: {weatherTodayHours}.{weatherTodayMinutes}
           </time>
         </div>
         <div className="today-info">
           <p className="today-city">{weatherTodayCity}</p>
-          <time className="today-data">Monday, {weatherTodayDay} March</time>
+          <time className="today-data">
+            {weatherTodayDayName}, {weatherTodayDay} {weatherTodayMonth}
+          </time>
         </div>
       </div>
       <div className="today-how">
@@ -35,7 +80,7 @@ const WeatherToday: React.FC = () => {
           </span>
           <p className="today-sky">{weatherTodaySky}</p>
         </div>
-        <img className="today-img" src="/images/icons/cloud_rain.svg" alt="rain" />
+        <img className="today-img" src={`/images/icons/${weatherTodayImage()}.svg`} alt="rain" />
       </div>
       <button className="today__favorite">
         <svg viewBox="0 0 128 128" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
