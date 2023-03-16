@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { NavLink } from 'react-router-dom';
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const months = [
+export const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+export const months = [
   'January',
   'February',
   'March',
@@ -19,9 +19,23 @@ const months = [
   'December',
 ];
 
+export const weatherTodayImage = (status: string | null) => {
+  switch (status) {
+    case 'Clouds':
+      return 'cloud';
+    case 'Clear':
+      return 'cloud_sun';
+    case 'Snow':
+      return 'cloud_snow';
+    case 'Rain':
+      return 'cloud_rain';
+    case 'Thunderstorm':
+      return 'cloud_thunder';
+  }
+};
+
 const WeatherToday: React.FC = () => {
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
-
   const weatherTodayCity = weatherToday && weatherToday.name;
   const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);
   const weatherTodaySky = weatherToday && weatherToday.weather[0].main;
@@ -35,26 +49,6 @@ const WeatherToday: React.FC = () => {
   const weatherTodayMonth =
     weatherToday &&
     months.filter((month, index) => (index === new Date().getMonth() ? month : null));
-
-  const weatherTodayImage = () => {
-    switch (weatherTodaySky) {
-      case 'Clouds':
-        return 'cloud';
-        break;
-      case 'Clear':
-        return 'cloud_sun';
-        break;
-      case 'Snow':
-        return 'cloud_snow';
-        break;
-      case 'Rain':
-        return 'cloud_rain';
-        break;
-      case 'Thunderstorm':
-        return 'cloud_thunder';
-        break;
-    }
-  };
 
   return (
     <NavLink className="weather__today today" to="/dayfull">
@@ -80,7 +74,13 @@ const WeatherToday: React.FC = () => {
           </span>
           <p className="today-sky">{weatherTodaySky}</p>
         </div>
-        <img className="today-img" src={`/images/icons/${weatherTodayImage()}.svg`} alt="rain" />
+        <img
+          className="today-img"
+          src={`/images/icons/${weatherTodayImage(
+            weatherToday && weatherToday.weather[0].main,
+          )}.svg`}
+          alt="rain"
+        />
       </div>
       <button className="today__favorite">
         <svg viewBox="0 0 128 128" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">

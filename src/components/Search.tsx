@@ -2,19 +2,22 @@ import React from 'react';
 import axios from 'axios';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLocation, setWeatherToday } from '../redux/slices/weatherSlice';
+import { setLocation, setWeatherToday, setWeatherDaily } from '../redux/slices/weatherSlice';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
   const location = useSelector((state: RootState) => state.weatherSlice.location);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=001880f79cc2b4febbc0da7678f430e7`;
-
+  const urlWeatherDay = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=001880f79cc2b4febbc0da7678f430e7`;
+  const urlWeatherDeily = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&cnt=6&appid=001880f79cc2b4febbc0da7678f430e7`;
   const searchLocation: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
-      axios.get(url).then((response) => {
+      axios.get(urlWeatherDay).then((response) => {
         dispatch(setWeatherToday(response.data));
-        console.log(response.data);
+      });
+
+      axios.get(urlWeatherDeily).then((response) => {
+        dispatch(setWeatherDaily(response.data.list));
       });
 
       dispatch(setLocation(''));

@@ -2,10 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface weatherState {
   weatherToday: WeatherToday | null;
+  weatherDaily: WeatherDaily[] | null;
   location: string;
 }
 
-type FetchWeatherTodayWeather = {
+export type FetchWeatherTodayWeather = {
   id: number;
   main: string;
   description: string;
@@ -13,6 +14,7 @@ type FetchWeatherTodayWeather = {
 };
 
 type WeatherToday = {
+  map: any;
   name: string;
   weather: FetchWeatherTodayWeather[];
   main: {
@@ -31,8 +33,18 @@ type WeatherToday = {
   };
 };
 
+export type WeatherDaily = {
+  dt: number;
+  main: {
+    temp_min: number;
+    temp_max: number;
+  };
+  weather: FetchWeatherTodayWeather[];
+};
+
 const initialState: weatherState = {
   weatherToday: null,
+  weatherDaily: null,
   location: '',
 };
 
@@ -43,11 +55,14 @@ export const weatherSlice = createSlice({
     setWeatherToday: (state, action: PayloadAction<WeatherToday>) => {
       state.weatherToday = action.payload;
     },
+    setWeatherDaily: (state, action: PayloadAction<WeatherDaily[]>) => {
+      state.weatherDaily = action.payload;
+    },
     setLocation: (state, action: PayloadAction<string>) => {
       state.location = action.payload;
     },
   },
 });
 
-export const { setLocation, setWeatherToday } = weatherSlice.actions;
+export const { setLocation, setWeatherToday, setWeatherDaily } = weatherSlice.actions;
 export default weatherSlice.reducer;
