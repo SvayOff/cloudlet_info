@@ -8,8 +8,20 @@ const Search: React.FC = () => {
   const dispatch = useDispatch();
   const location = useSelector((state: RootState) => state.weatherSlice.location);
 
+  const locationInput = React.useRef<HTMLInputElement>(null);
+
   const urlWeatherDay = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=001880f79cc2b4febbc0da7678f430e7`;
   const urlWeatherDeily = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&cnt=6&appid=001880f79cc2b4febbc0da7678f430e7`;
+
+  const onChangeLocation = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setLocation(event.target.value));
+  };
+
+  const onClickClear = () => {
+    dispatch(setLocation(''));
+    locationInput.current && locationInput.current.focus();
+  };
+
   const searchLocation: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
       axios.get(urlWeatherDay).then((response) => {
@@ -21,6 +33,7 @@ const Search: React.FC = () => {
       });
 
       dispatch(setLocation(''));
+      locationInput.current && locationInput.current.blur();
     }
   };
 
@@ -28,9 +41,8 @@ const Search: React.FC = () => {
     <div className="header__form">
       <input
         className="header__form-input"
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          dispatch(setLocation(event.target.value));
-        }}
+        ref={locationInput}
+        onChange={onChangeLocation}
         onKeyDown={searchLocation}
         value={location}
         placeholder="Find location..."
@@ -53,7 +65,7 @@ const Search: React.FC = () => {
         </svg>
       </div>
       {location.length ? (
-        <span className="header__form-clear">
+        <span onClick={onClickClear} className="header__form-clear">
           <svg
             height={83.368}
             viewBox="0 0 1364 1142"
