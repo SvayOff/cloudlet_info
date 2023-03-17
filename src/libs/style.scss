@@ -888,10 +888,13 @@
     font-size: 24px;
   }
   &__time {
+    display: block;
     position: relative;
     text-align: center;
-    time {
-      margin-left: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    span {
+      @include f500;
     }
   }
   &__cols {

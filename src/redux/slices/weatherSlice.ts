@@ -31,6 +31,10 @@ type WeatherToday = {
     sunrise: number;
     sunset: number;
   };
+  wind: {
+    deg: number;
+    speed: number;
+  };
 };
 
 export type WeatherDaily = {

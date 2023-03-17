@@ -49,7 +49,6 @@ const WeatherToday: React.FC = () => {
   const weatherTodayMonth =
     weatherToday &&
     months.filter((month, index) => (index === new Date().getMonth() ? month : null));
-
   return (
     <NavLink className="weather__today today" to="/dayfull">
       <div className="today-about">
