@@ -337,6 +337,9 @@
   &:hover {
     background-color: #fff;
   }
+  &-inner {
+    width: 100%;
+  }
   &-about {
     display: flex;
     align-items: center;
@@ -395,6 +398,7 @@
     border-radius: 50%;
     height: 40px;
     width: 40px;
+    z-index: 10;
     cursor: pointer;
     transition: all 0.3s ease;
     &:hover {

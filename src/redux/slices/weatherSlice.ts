@@ -4,6 +4,7 @@ export interface weatherState {
   weatherToday: WeatherToday | null;
   weatherDaily: WeatherDaily[] | null;
   location: string;
+  weatherFavorites: WeatherToday[];
 }
 
 export type FetchWeatherTodayWeather = {
@@ -35,6 +36,7 @@ export type WeatherToday = {
     deg: number;
     speed: number;
   };
+  id: number;
 };
 
 export type WeatherDaily = {
@@ -50,6 +52,7 @@ const initialState: weatherState = {
   weatherToday: null,
   weatherDaily: null,
   location: '',
+  weatherFavorites: [],
 };
 
 export const weatherSlice = createSlice({
@@ -65,8 +68,30 @@ export const weatherSlice = createSlice({
     setLocation: (state, action: PayloadAction<string>) => {
       state.location = action.payload;
     },
+    setWeatherFavorites: (state, action: PayloadAction<WeatherToday>) => {
+      const findWeather = state.weatherFavorites.find(
+        (weather) => weather.id === action.payload.id,
+      );
+
+      if (findWeather) {
+        return;
+      } else {
+        state.weatherFavorites = [...state.weatherFavorites, action.payload];
+      }
+    },
+    removeWeatherFromFavorites: (state, action: PayloadAction<number>) => {
+      state.weatherFavorites = state.weatherFavorites.filter(
+        (weather) => weather.id !== action.payload,
+      );
+    },
   },
 });
 
-export const { setLocation, setWeatherToday, setWeatherDaily } = weatherSlice.actions;
+export const {
+  setLocation,
+  setWeatherToday,
+  setWeatherDaily,
+  setWeatherFavorites,
+  removeWeatherFromFavorites,
+} = weatherSlice.actions;
 export default weatherSlice.reducer;

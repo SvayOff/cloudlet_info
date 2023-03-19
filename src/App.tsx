@@ -12,7 +12,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Empty from './pages/Empty';
 import Error from './pages/Error';
-import { setWeatherDaily, setWeatherToday } from './redux/slices/weatherSlice';
+import { setWeatherDaily, setWeatherFavorites, setWeatherToday } from './redux/slices/weatherSlice';
 
 const router = createBrowserRouter([
   {
@@ -55,11 +55,13 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
   const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
+  const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
 
   React.useEffect(() => {
     if (localStorage.length) {
       const daily = JSON.parse(localStorage.getItem('daily') || '');
       const location = JSON.parse(localStorage.getItem('location') || '');
+
       if (daily) {
         dispatch(setWeatherDaily(daily));
       }
@@ -70,10 +72,15 @@ const App: React.FC = () => {
     }
   }, []);
 
+  React.useEffect(() => {}, [weatherFavorites]);
+
   React.useEffect(() => {
     localStorage.setItem('location', JSON.stringify(weatherToday));
+
     localStorage.setItem('daily', JSON.stringify(weatherDaily));
-  }, [weatherToday, weatherDaily]);
+
+    localStorage.setItem('favorites', JSON.stringify(weatherFavorites));
+  }, [weatherToday, weatherDaily, weatherFavorites]);
 
   return (
     <div className="wrapper">
