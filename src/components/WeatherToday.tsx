@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { NavLink } from 'react-router-dom';
 
-export const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+export const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export const months = [
   'January',
   'February',
@@ -45,10 +45,12 @@ const WeatherToday: React.FC = () => {
     new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : new Date().getMinutes();
   const weatherTodayDay = new Date().getDate();
   const weatherTodayDayName =
-    weatherToday && days.filter((day, index) => (index === new Date().getDay() - 1 ? day : null));
+    weatherToday && days.filter((day, index) => (index === new Date().getDay() ? day : null));
   const weatherTodayMonth =
     weatherToday &&
     months.filter((month, index) => (index === new Date().getMonth() ? month : null));
+  console.log(weatherToday);
+
   return (
     <NavLink className="weather__today today" to="/dayfull">
       <div className="today-about">

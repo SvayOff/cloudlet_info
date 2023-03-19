@@ -16,7 +16,7 @@ const WeekDay: React.FC<WeatherDaily> = (day) => {
 
   const weatherDailyDay = (day: WeatherDaily) => {
     return days.filter((dayName, index) =>
-      index === new Date(day.dt * 1000).getDay() - 1 ? dayName : null,
+      index === new Date(day.dt * 1000).getDay() ? dayName : null,
     );
   };
   return (

@@ -13,7 +13,7 @@ export type FetchWeatherTodayWeather = {
   icon: string;
 };
 
-type WeatherToday = {
+export type WeatherToday = {
   map: any;
   name: string;
   weather: FetchWeatherTodayWeather[];

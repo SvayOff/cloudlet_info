@@ -15,7 +15,7 @@ const DayFull: React.FC = () => {
   const weatherTodayCity = weatherToday && weatherToday.name;
   const weatherTodaySky = weatherToday && weatherToday.weather[0].main;
   const weatherTodayDayName =
-    weatherToday && days.filter((day, index) => (index === new Date().getDay() - 1 ? day : null));
+    weatherToday && days.filter((day, index) => (index === new Date().getDay() ? day : null));
   const weatherTodayDay = new Date().getDate();
   const weatherTodayMonth =
     weatherToday &&
