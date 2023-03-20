@@ -416,6 +416,18 @@
       width: 30px;
       transition: all 0.3s ease;
     }
+    &-remove {
+      &:hover {
+        path {
+        }
+      }
+      path {
+        stroke-width: 2px;
+      }
+      svg {
+        stroke: #000;
+      }
+    }
   }
 }
 .information {
