@@ -263,7 +263,9 @@
 }
 
 @media (max-width: 480px) {
-  .information__inner {
+  .information__inner,
+  html.dark .information__inner,
+  html.dark .week {
     box-shadow: none;
     border: none;
     padding: 0;

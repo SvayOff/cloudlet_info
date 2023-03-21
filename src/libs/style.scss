@@ -5,7 +5,7 @@
 /* STYLES */
 .content {
   border-radius: 30px;
-  margin-top: 50px;
+  margin: 20px 0;
   padding: 20px;
   background-color: rgba($color: #fff, $alpha: 0.3);
   @include shadow;
@@ -1023,7 +1023,7 @@
 html {
   &.dark {
     body {
-      background: linear-gradient(0deg, rgba(#221f29, 1) 0%, rgba(#211a29, 1) 100%);
+      background-color: #333b3b;
     }
     .content {
       background-color: rgba($color: #000, $alpha: 0.3);
