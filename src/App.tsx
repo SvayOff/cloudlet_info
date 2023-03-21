@@ -65,9 +65,12 @@ const App: React.FC = () => {
       if (daily) {
         dispatch(setWeatherDaily(daily));
       }
-
       if (location) {
         dispatch(setWeatherToday(location));
+      }
+      const themeFromLS = localStorage.getItem('theme');
+      if (themeFromLS) {
+        dispatch(setTheme(themeFromLS));
       }
     }
   }, []);
@@ -78,7 +81,7 @@ const App: React.FC = () => {
     localStorage.setItem('daily', JSON.stringify(weatherDaily));
 
     localStorage.setItem('favorites', JSON.stringify(weatherFavorites));
-  }, [weatherToday, weatherDaily, weatherFavorites, theme]);
+  }, [weatherToday, weatherDaily, weatherFavorites]);
 
   return (
     <div className="wrapper">
