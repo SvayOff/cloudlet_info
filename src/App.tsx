@@ -10,9 +10,9 @@ import Maps from './pages/Maps';
 import Favorites from './pages/Favorites';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Empty from './pages/Empty';
 import Error from './pages/Error';
-import { setWeatherDaily, setWeatherFavorites, setWeatherToday } from './redux/slices/weatherSlice';
+import { setWeatherDaily, setWeatherToday } from './redux/slices/weatherSlice';
+import { setTheme } from './redux/slices/themeSlice';
 
 const router = createBrowserRouter([
   {
@@ -56,12 +56,12 @@ const App: React.FC = () => {
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
   const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
   const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
+  const theme = useSelector((state: RootState) => state.themeSlice.theme);
 
   React.useEffect(() => {
     if (localStorage.length) {
       const daily = JSON.parse(localStorage.getItem('daily') || '');
       const location = JSON.parse(localStorage.getItem('location') || '');
-
       if (daily) {
         dispatch(setWeatherDaily(daily));
       }
@@ -72,15 +72,13 @@ const App: React.FC = () => {
     }
   }, []);
 
-  React.useEffect(() => {}, [weatherFavorites]);
-
   React.useEffect(() => {
     localStorage.setItem('location', JSON.stringify(weatherToday));
 
     localStorage.setItem('daily', JSON.stringify(weatherDaily));
 
     localStorage.setItem('favorites', JSON.stringify(weatherFavorites));
-  }, [weatherToday, weatherDaily, weatherFavorites]);
+  }, [weatherToday, weatherDaily, weatherFavorites, theme]);
 
   return (
     <div className="wrapper">

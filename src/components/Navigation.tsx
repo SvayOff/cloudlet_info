@@ -1,7 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setTheme } from '../redux/slices/themeSlice';
 import { NavLink } from 'react-router-dom';
 
 const Navigation: React.FC = () => {
+  const dispatch = useDispatch();
+  const theme = useSelector((state: RootState) => state.themeSlice.theme);
+
   return (
     <section className="navigation">
       <nav className="navigation__inner">
@@ -52,13 +58,27 @@ const Navigation: React.FC = () => {
           </li>
         </ul>
         <div className="navigation__other">
-          <div className="navigation__theme">
-            <img
-              className="navigation__theme-img"
-              src="/images/icons/dark_theme.svg"
-              alt="dark_theme"
-            />
-          </div>
+          {theme === 'light' ? (
+            <div
+              className="navigation__theme navigation__theme-light"
+              onClick={() => dispatch(setTheme('dark'))}>
+              <img
+                className="navigation__theme-img"
+                src={'/images/icons/dark_theme.svg'}
+                alt="light_theme"
+              />
+            </div>
+          ) : (
+            <div
+              className="navigation__theme navigation__theme-dark"
+              onClick={() => dispatch(setTheme('light'))}>
+              <img
+                className="navigation__theme-img"
+                src={'/images/icons/light_theme.svg'}
+                alt="dark_theme"
+              />
+            </div>
+          )}
           <div className="navigation__lang">
             <div className="navigation__lang-active">
               <img className="navigation__lang-img" src="/images/icons/uk.svg" alt="uk" />

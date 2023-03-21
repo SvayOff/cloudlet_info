@@ -3,15 +3,12 @@
 @import "../libs/global";
 
 /* STYLES */
-
 .content {
   border-radius: 30px;
   margin-top: 50px;
   padding: 20px;
   background-color: rgba($color: #fff, $alpha: 0.3);
-  -webkit-box-shadow: 0px 0px 85px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 0px 85px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 85px 0px rgba(0, 0, 0, 0.3);
+  @include shadow;
   @include borderDark;
   &__block {
     display: flex;
@@ -493,13 +490,13 @@
       width: 100%;
       border-radius: 3px;
     }
-    &-sunrice {
+    &-sunrise {
       margin-bottom: 10px;
       svg {
         transform: translateX(2px);
       }
     }
-    &-sunrice,
+    &-sunrise,
     &-sunset {
       svg {
         width: 30px;
@@ -983,7 +980,6 @@
     font-size: 20px;
     margin: 0 auto;
     @include f600;
-    // margin-top: -20px;
   }
   &__decors {
     position: absolute;
@@ -1024,6 +1020,407 @@
   @include f500;
 }
 
+html {
+  &.dark {
+    body {
+      background: linear-gradient(0deg, rgba(#221f29, 1) 0%, rgba(#211a29, 1) 100%);
+    }
+    .content {
+      background-color: rgba($color: #000, $alpha: 0.3);
+      @include shadowLight;
+      @include borderLight;
+    }
+    .header {
+      &__inner {
+        @include shadowLight;
+        @include borderLight;
+      }
+      &__logo {
+        color: #fff;
+      }
+      &__form {
+        &-input {
+          @include borderLight;
+          @include shadowLight;
+        }
+        &-list {
+          background-color: rgba($color: #1b1a1a, $alpha: 1);
+          @include borderLight;
+          @include shadowLight;
+        }
+        &-place {
+          @include borderLight;
+          color: #fff;
+          &:hover {
+            background-color: rgba($color: #fff, $alpha: 0.05);
+          }
+        }
+      }
+
+      &__signin {
+        @include borderLight;
+        color: #fff;
+        &:hover {
+          color: #000;
+        }
+      }
+      &__account {
+        @include borderLight;
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: #fff;
+          path {
+            stroke: #000;
+          }
+        }
+        path {
+          stroke: #fff;
+          transition: stroke 0.3s ease;
+        }
+      }
+    }
+
+    // navigation
+    .navigation {
+      &__list {
+        @include borderLight;
+        @include shadowLight;
+        &-item {
+          width: 40px;
+          height: 40px;
+          @include borderLight;
+          &:hover {
+            background-color: #fff;
+            svg {
+              fill: rgba($color: #000000, $alpha: 1);
+            }
+            .favourite-img {
+              path {
+                stroke: rgba($color: #000000, $alpha: 1);
+              }
+            }
+          }
+          svg {
+            fill: rgba($color: #fff, $alpha: 0.7);
+          }
+          .favourite-img {
+            path {
+              stroke: rgba($color: #fff, $alpha: 0.7);
+              transition: stroke 0.3s ease;
+            }
+          }
+        }
+      }
+      &__other {
+        @include borderLight;
+        @include shadowLight;
+      }
+      &__theme {
+        @include borderLight;
+      }
+      &__lang {
+        &-active {
+          @include borderLight;
+        }
+        &-item {
+          @include borderLight;
+        }
+        &-list {
+          @include borderLight;
+          @include shadowLight;
+        }
+      }
+    }
+
+    // weather, today, information, week
+    .weather {
+      @include shadowLight;
+      @include borderLight;
+    }
+    .today {
+      @include shadowLight;
+      @include borderLight;
+      &:hover {
+        background-color: #fff;
+        .today-about {
+          color: #000;
+        }
+        .today-time {
+          &::after {
+            background-color: rgba($color: #000, $alpha: 0.7);
+          }
+        }
+        .today-how {
+          color: #000;
+        }
+      }
+      &-about {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      &-time {
+        &::after {
+          background-color: rgba($color: #fff, $alpha: 0.7);
+          transition: background-color 0.3s ease;
+        }
+      }
+      &-how {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      &__favorite {
+        background-color: rgba($color: #000000, $alpha: 0.8);
+        @include borderLight;
+        &:hover {
+          background-color: rgba($color: #fff, $alpha: 0.05);
+          @include borderDark;
+          svg {
+            fill: red;
+            stroke: #000;
+          }
+        }
+        svg {
+          stroke: #fff;
+        }
+        &-remove {
+          path {
+            stroke-width: 2px;
+          }
+          svg {
+            stroke: #fff;
+          }
+        }
+      }
+    }
+    .information {
+      &__inner {
+        @include shadowLight;
+        @include borderLight;
+      }
+      &__col {
+        @include shadowLight;
+        @include borderLight;
+        cursor: default;
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: #fff;
+          transform: scale(0.95);
+          .information__col-title,
+          .information__col-info,
+          .information__col-sunrise,
+          .information__col-sunset,
+          .information__col-max,
+          .information__col-min {
+            color: #000;
+          }
+          .information__col-graph {
+            @include borderDark;
+          }
+          .information__col-direction,
+          .information__col-speed {
+            color: #000;
+            svg {
+              fill: #000;
+            }
+          }
+        }
+        &-title,
+        &-info {
+          color: #fff;
+          transition: color 0.3s ease;
+        }
+        &-graph {
+          @include borderLight;
+          transition: border 0.3s ease;
+        }
+        &-sunrise,
+        &-sunset {
+          color: #fff;
+          transition: color 0.3s ease;
+        }
+        &-min,
+        &-max {
+          color: #fff;
+          transition: color 0.3s ease;
+        }
+        &-direction,
+        &-speed {
+          color: #fff;
+          svg {
+            fill: #fff;
+            transition: fill 0.3s ease;
+          }
+        }
+      }
+    }
+    .week {
+      @include borderLight;
+      @include shadowLight;
+      &__item {
+        @include shadowLight;
+        @include borderLight;
+        color: #fff;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+
+    // login & register
+    .login,
+    .register {
+      @include shadowLight;
+      @include borderLight;
+      &__title {
+        color: #fff;
+      }
+      &__form {
+        &-title {
+          color: #fff;
+        }
+        &-input {
+          color: #fff;
+          border-bottom: 1px solid #fff;
+          &:focus ~ span,
+          &:valid ~ span {
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
+          }
+        }
+        &-icon {
+          path {
+            stroke: #fff;
+          }
+        }
+        .icon-pass,
+        .icon-email {
+          path {
+            stroke-width: 0.5px;
+          }
+        }
+        &-btn {
+          @include borderLight;
+          color: #fff;
+          &:hover {
+            background-color: #fff;
+            color: #000;
+          }
+        }
+        &-reg {
+          color: #fff;
+        }
+        &-link {
+          color: #fff;
+          &:hover {
+            color: rgba($color: #fff, $alpha: 0.7);
+            &::before {
+              width: 100%;
+              background-color: rgba($color: #fff, $alpha: 0.5);
+            }
+          }
+          &::before {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+
+    // favorites
+    .favorites {
+      @include shadowLight;
+      @include borderLight;
+      &__item {
+        @include shadowLight;
+        @include borderLight;
+        color: #fff;
+        &:hover {
+          background-color: #fff;
+          transform: scale(0.95);
+          color: #000;
+          .favorites__item-btn {
+            @include borderDark;
+            color: #000;
+          }
+        }
+        &-btn {
+          @include borderLight;
+          color: #fff;
+          &:hover {
+            background-color: rgba($color: #000, $alpha: 0.1);
+          }
+        }
+      }
+    }
+
+    // error
+    .error {
+      @include borderLight;
+      @include shadowLight;
+      &__desc {
+        color: #fff;
+      }
+      &__btn {
+        @include borderLight;
+        color: #fff;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+
+    // dayfull
+    .dayfull {
+      @include borderLight;
+      @include shadowLight;
+      color: #fff;
+    }
+
+    // maps
+    .maps {
+      iframe {
+        @include borderLight;
+        @include shadowLight;
+      }
+    }
+
+    // empty
+    .empty {
+      @include borderLight;
+      @include shadowLight;
+      &__img {
+        svg {
+          max-width: 200px;
+          width: 100%;
+          stroke: #fff;
+        }
+        path {
+          fill: rgb(43, 159, 226);
+        }
+      }
+      &__text {
+        color: #fff;
+      }
+      &__decors {
+        position: absolute;
+        left: 0;
+        top: 0;
+        animation: stars infinite 8s ease;
+      }
+      &__decor {
+        position: absolute;
+        path {
+          fill: #ffed09;
+          stroke: #ffcf48;
+        }
+      }
+    }
+
+    // other
+    .title {
+      color: #fff;
+    }
+  }
+}
 @keyframes stars {
   from {
     transform: scale(1);

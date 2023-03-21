@@ -14,7 +14,7 @@ const SunCol: React.FC = () => {
   return (
     <div className="information__col information__col-sun sun">
       <h2 className="information__col-title">Sunrise & Sunset</h2>
-      <div className="information__col-sunrice">
+      <div className="information__col-sunrise">
         <svg viewBox="0 0 32 32" xmlSpace="preserve">
           <title />
           <path d="M25 20c0-4.971-4.029-9-9-9s-9 4.029-9 9h18z" fill="#F2B035" />
