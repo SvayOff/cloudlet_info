@@ -11,7 +11,11 @@ import Favorites from './pages/Favorites';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
-import { setWeatherDaily, setWeatherToday } from './redux/slices/weatherSlice';
+import {
+  setWeatherDaily,
+  setWeatherFavoritesFromLS,
+  setWeatherToday,
+} from './redux/slices/weatherSlice';
 import { setTheme } from './redux/slices/themeSlice';
 
 const router = createBrowserRouter([
@@ -56,21 +60,26 @@ const App: React.FC = () => {
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
   const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
   const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
-  const theme = useSelector((state: RootState) => state.themeSlice.theme);
+  const isFavoriteAdded = React.useRef(false);
 
   React.useEffect(() => {
     if (localStorage.length) {
       const daily = JSON.parse(localStorage.getItem('daily') || '');
       const location = JSON.parse(localStorage.getItem('location') || '');
+      const favorites = weatherFavorites && JSON.parse(localStorage.getItem('favorites') || '');
+      const themeFromLS = localStorage.getItem('theme');
       if (daily) {
         dispatch(setWeatherDaily(daily));
       }
       if (location) {
         dispatch(setWeatherToday(location));
       }
-      const themeFromLS = localStorage.getItem('theme');
       if (themeFromLS) {
         dispatch(setTheme(themeFromLS));
+      }
+      if (favorites) {
+        dispatch(setWeatherFavoritesFromLS(favorites));
+        isFavoriteAdded.current = true;
       }
     }
   }, []);
@@ -80,8 +89,10 @@ const App: React.FC = () => {
 
     localStorage.setItem('daily', JSON.stringify(weatherDaily));
 
-    localStorage.setItem('favorites', JSON.stringify(weatherFavorites));
-  }, [weatherToday, weatherDaily, weatherFavorites]);
+    if (isFavoriteAdded.current === false) {
+      localStorage.setItem('favorites', JSON.stringify([]));
+    }
+  }, [weatherToday, weatherDaily]);
 
   return (
     <div className="wrapper">
