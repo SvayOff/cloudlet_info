@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Empty: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="empty">
       <i className="empty__img">
@@ -16,7 +19,7 @@ const Empty: React.FC = () => {
           />
         </svg>
       </i>
-      <p className="empty__text">It's empty now. Find out what the weather is like in your area.</p>
+      <p className="empty__text">{t('emptyText')}</p>
       <div className="empty__decors">
         <i className="empty__decor empty__decor-first">
           <svg height={91} width={91} xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">

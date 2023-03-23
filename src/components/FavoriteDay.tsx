@@ -3,9 +3,12 @@ import { useDispatch } from 'react-redux';
 import { WeatherToday } from '../redux/slices/weatherSlice';
 import { removeWeatherFromFavorites } from '../redux/slices/weatherSlice';
 import { weatherTodayImage } from './WeatherToday';
+import { useTranslation } from 'react-i18next';
+import { weatherTodaySky } from './WeatherToday';
 
 const FavoriteDay: React.FC<WeatherToday> = (day) => {
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
   const removeFromFavorites = () => {
     dispatch(removeWeatherFromFavorites(day.id));
@@ -19,7 +22,7 @@ const FavoriteDay: React.FC<WeatherToday> = (day) => {
         src={`/images/icons/${weatherTodayImage(day && day.weather[0].main)}.svg`}
         alt="wind"
       />
-      <p className="favorites__item-desc">{day.weather[0].main}</p>
+      <p className="favorites__item-desc">{weatherTodaySky(i18n.language, day.weather[0].main)}</p>
       <div className="favorites__item-temp">
         <div className="favorites__item-max">
           <svg viewBox="0 0 32 32" xmlSpace="preserve">
@@ -42,7 +45,7 @@ const FavoriteDay: React.FC<WeatherToday> = (day) => {
             />
           </svg>
           <span>
-            MAX: {Math.round(day.main.temp_max)}
+            {t('maxTemp')} {Math.round(day.main.temp_max)}
             <span>°C</span>
           </span>
         </div>
@@ -62,13 +65,13 @@ const FavoriteDay: React.FC<WeatherToday> = (day) => {
             </g>
           </svg>
           <span>
-            MIN: {Math.round(day.main.temp_min)}
+            {t('minTemp')} {Math.round(day.main.temp_min)}
             <span>°C</span>
           </span>
         </div>
       </div>
       <button className="favorites__item-btn" onClick={removeFromFavorites}>
-        Remove From Favorites
+        {t('removeFromFavorites')}
       </button>
     </div>
   );

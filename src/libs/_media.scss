@@ -188,12 +188,23 @@
     margin-bottom: 0;
     margin-right: 10px;
   }
-  .navigation__lang-active {
-    margin-bottom: 0;
+  .navigation__lang-list {
+    transform: translateX(5px);
   }
   .navigation__lang.show {
     .navigation__lang-list {
-      display: flex;
+      display: block;
+      background-color: rgba($color: #b5f2f2, $alpha: 0.5);
+      backdrop-filter: blur(2px);
+      margin-top: 0;
+    }
+  }
+  html.dark {
+    .navigation__lang.show {
+      .navigation__lang-list {
+        background-color: rgba($color: #333b3b, $alpha: 0.5);
+        backdrop-filter: blur(2px);
+      }
     }
   }
   .navigation__lang-list {

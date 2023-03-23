@@ -4,31 +4,41 @@ import { RootState } from '../redux/store';
 import { weatherTodayImage } from './WeatherToday';
 import { days } from './WeatherToday';
 import { WeatherDaily } from '../redux/slices/weatherSlice';
+import { useTranslation } from 'react-i18next';
+import { weatherTodaySky } from './WeatherToday';
 
 const WeekDay: React.FC<WeatherDaily> = (day) => {
   const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
-
+  const { t, i18n } = useTranslation();
   const weatherDailyTime = (day: WeatherDaily) => {
     return new Date(day.dt * 1000).getHours() < 10
       ? `0${new Date(day.dt * 1000).getHours()}`
       : new Date(day.dt * 1000).getHours();
   };
-
   const weatherDailyDay = (day: WeatherDaily) => {
-    return days.filter((dayName, index) =>
-      index === new Date(day.dt * 1000).getDay() ? dayName : null,
-    );
+    if (i18n.language === 'en') {
+      return days[0].filter((dayName, index) =>
+        index === new Date(day.dt * 1000).getDay() ? dayName : null,
+      );
+    } else {
+      return days[1].filter((dayName, index) =>
+        index === new Date(day.dt * 1000).getDay() ? dayName : null,
+      );
+    }
   };
+
   return (
     <div className="week__item">
       <h3 className="week__item-day">{weatherDailyDay(day)}</h3>
-      <time className="week__item-time">Time: {weatherDailyTime(day)}.00</time>
+      <time className="week__item-time">
+        {t('time')}: {weatherDailyTime(day)}.00
+      </time>
       <img
         className="week__item-img"
         src={`/images/icons/${weatherDaily && weatherTodayImage(day.weather[0].main)}.svg`}
         alt="wind"
       />
-      <p className="week__item-desc">{day.weather[0].main}</p>
+      <p className="week__item-desc">{weatherTodaySky(i18n.language, day.weather[0].main)}</p>
       <div className="week__item-temp">
         <div className="week__item-max">
           <svg viewBox="0 0 32 32" xmlSpace="preserve">

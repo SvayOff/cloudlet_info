@@ -2,8 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from './Logo';
 import Search from './Search';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <header className="header">
       <div className="header__inner">
@@ -12,7 +14,7 @@ const Header: React.FC = () => {
         <Search />
 
         <NavLink className="header__signin" to="/login">
-          Sign In
+          {t('signIn')}
         </NavLink>
 
         <a className="header__account" href="#">

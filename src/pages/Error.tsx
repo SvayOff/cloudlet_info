@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 const Error: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="error">
       <div className="error__images">
@@ -53,9 +56,9 @@ const Error: React.FC = () => {
           </g>
         </svg>
       </div>
-      <p className="error__desc">Something went wrong. Try later!</p>
-      <NavLink className="error__btn" to="/weather">
-        Go Back
+      <p className="error__desc">{t('errorText')}</p>
+      <NavLink className="error__btn" to="/">
+        {t('btnBack')}
       </NavLink>
     </section>
   );

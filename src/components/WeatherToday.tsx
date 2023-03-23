@@ -3,21 +3,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { setWeatherFavorites, removeWeatherFromFavorites } from '../redux/slices/weatherSlice';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-export const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const days = [
+  ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  ['Недiля', 'Понедiлок', 'Вiвторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'],
+];
 export const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'Novermber',
-  'December',
+  [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'Novermber',
+    'December',
+  ],
+  [
+    'Ciчня',
+    'Лютого',
+    'Березня',
+    'Квiтня',
+    'Травня',
+    'Червня',
+    'Липня',
+    'Серпня',
+    'Вересня',
+    'Жовтня',
+    'Листопада',
+    'Грудня',
+  ],
 ];
 
 export const weatherTodayImage = (status: string | null) => {
@@ -32,27 +52,72 @@ export const weatherTodayImage = (status: string | null) => {
       return 'cloud_rain';
     case 'Thunderstorm':
       return 'cloud_thunder';
+    default:
+      return 'cloud_danger';
+  }
+};
+ 
+export const weatherTodaySky = (lang: string, sky: string) => {
+  switch (sky) {
+    case 'Clouds':
+      return lang === 'en' ? 'Clouds' : 'Хмарно';
+    case 'Clear':
+      return lang === 'en' ? 'Clear' : 'Ясно';
+    case 'Snow':
+      return lang === 'en' ? 'Snow' : 'Снiг';
+    case 'Rain':
+      return lang === 'en' ? 'Rain' : 'Дощ';
+    case 'Thunderstorm':
+      return lang === 'en' ? 'Thunderstorm' : 'Гроза';
+    case 'Mist':
+      return lang === 'en' ? 'Mist' : 'Туман';
+    case 'Smoke':
+      return lang === 'en' ? 'Smoke' : 'Дим';
+    case 'Haze':
+    case 'Fog':
+      return lang === 'en' ? 'Haze' : 'Iмла';
+    case 'Dust':
+      return lang === 'en' ? 'Dust' : 'Пил';
+    case 'Sand':
+      return lang === 'en' ? 'Sand' : 'Пісок';
+    case 'Ash':
+      return lang === 'en' ? 'Ash' : 'Зола';
+    case 'Squall':
+      return lang === 'en' ? 'Squall' : 'Шквал';
+    case 'Tornado':
+      return lang === 'en' ? 'Tornado' : 'Торнадо';
   }
 };
 
 const WeatherToday: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
   const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
 
   const weatherTodayCity = weatherToday && weatherToday.name;
   const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);
-  const weatherTodaySky = weatherToday && weatherToday.weather[0].main;
+
   const weatherTodayHours =
     new Date().getHours() < 10 ? `0${new Date().getHours()}` : new Date().getHours();
   const weatherTodayMinutes =
     new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : new Date().getMinutes();
   const weatherTodayDay = new Date().getDate();
-  const weatherTodayDayName =
-    weatherToday && days.filter((day, index) => (index === new Date().getDay() ? day : null));
-  const weatherTodayMonth =
-    weatherToday &&
-    months.filter((month, index) => (index === new Date().getMonth() ? month : null));
+  const weatherTodayDayName = () => {
+    if (i18n.language === 'en') {
+      return days[0].filter((day, index) => (index === new Date().getDay() ? day : null));
+    } else {
+      return days[1].filter((day, index) => (index === new Date().getDay() ? day : null));
+    }
+  };
+  const weatherTodayMonth = () => {
+    if (i18n.language === 'en') {
+      return months[0].filter((month, index) => (index === new Date().getMonth() ? month : null));
+    } else {
+      return months[1].filter((month, index) => (index === new Date().getMonth() ? month : null));
+    }
+  };
   const hasWeatherInFavorites =
     weatherToday && weatherFavorites.find((weather) => weather.id === weatherToday.id);
 
@@ -69,15 +134,15 @@ const WeatherToday: React.FC = () => {
       <NavLink className="today-inner" to="/dayfull">
         <div className="today-about">
           <div className="today-time">
-            Today
+            {t('today')}
             <time>
-              Time: {weatherTodayHours}.{weatherTodayMinutes}
+              {t('time')}: {weatherTodayHours}.{weatherTodayMinutes}
             </time>
           </div>
           <div className="today-info">
             <p className="today-city">{weatherTodayCity}</p>
             <time className="today-data">
-              {weatherTodayDayName}, {weatherTodayDay} {weatherTodayMonth}
+              {weatherTodayDayName()}, {weatherTodayDay} {weatherTodayMonth()}
             </time>
           </div>
         </div>
@@ -87,7 +152,9 @@ const WeatherToday: React.FC = () => {
               {weatherTodayTemp}
               <span>°C</span>
             </span>
-            <p className="today-sky">{weatherTodaySky}</p>
+            <p className="today-sky">
+              {weatherToday && weatherTodaySky(i18n.language, weatherToday.weather[0].main)}
+            </p>
           </div>
           <img
             className="today-img"

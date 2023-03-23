@@ -150,6 +150,8 @@
     @include borderDark;
     border-radius: 30px;
     padding: 10px;
+    width: 80px;
+    text-align: center;
     transform: translateY(10px);
     transition: all 0.3s ease;
     &:hover {
@@ -242,10 +244,12 @@
     }
   }
   &__other {
+    position: relative;
     @include borderDark;
     @include shadow;
     border-radius: 30px;
     padding: 20px 10px;
+    z-index: 10;
   }
   &__theme {
     display: flex;
@@ -275,17 +279,16 @@
       transition: all 0.3s ease;
       cursor: pointer;
       overflow: hidden;
-      margin-bottom: 10px;
     }
     &-item {
       width: 40px;
-      height: 40px;
-      @include borderDark;
+      height: 0px;
       border-radius: 50%;
-      transition: all 0.3s ease;
       cursor: pointer;
       overflow: hidden;
       transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
     }
     &-img {
       background-position: center;
@@ -295,11 +298,22 @@
       padding: 0;
     }
     &-list {
-      display: none;
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
     &.show {
       .navigation__lang-list {
-        display: block;
+        height: 160%;
+        opacity: 1;
+        overflow: visible;
+        margin-top: 10px;
+      }
+      .navigation__lang-item {
+        height: 40px;
+        opacity: 1;
+        @include borderDark;
       }
     }
   }
@@ -662,12 +676,14 @@
       @include borderDark;
       border-radius: 30px;
       background-color: transparent;
+      width: max-content;
+      min-width: 90px;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin: 15px 0 10px;
+      margin: 15px 0;
       &:hover {
         background-color: #fff;
-        transform: rotateZ(20deg);
+        transform: rotateZ(10deg);
       }
     }
     &-reg {
@@ -896,6 +912,7 @@
   }
   &__city {
     font-size: 48px;
+    margin-bottom: 10px;
   }
   &__data {
     font-size: 24px;
@@ -1122,12 +1139,10 @@ html {
         &-active {
           @include borderLight;
         }
-        &-item {
-          @include borderLight;
-        }
-        &-list {
-          @include borderLight;
-          @include shadowLight;
+        &.show {
+          .navigation__lang-item {
+            @include borderLight;
+          }
         }
       }
     }

@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { useTranslation } from 'react-i18next';
 
 const SunCol: React.FC = () => {
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const { t } = useTranslation();
 
   const weatherTodaySunrice =
     weatherToday && new Date(weatherToday.sys.sunrise * 1000).getHours().toFixed(2);
@@ -13,7 +15,7 @@ const SunCol: React.FC = () => {
 
   return (
     <div className="information__col information__col-sun sun">
-      <h2 className="information__col-title">Sunrise & Sunset</h2>
+      <h2 className="information__col-title">{t('sunCol')}</h2>
       <div className="information__col-sunrise">
         <svg viewBox="0 0 32 32" xmlSpace="preserve">
           <title />

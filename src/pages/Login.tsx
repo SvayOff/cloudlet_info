@@ -1,14 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="login">
-      <div className="login__title">Sign In</div>
+      <div className="login__title">{t('signIn')}</div>
       <form className="login__form">
         <div className="login__form-block">
           <input className="login__form-input login__form-log" type="text" required />
-          <span className="login__form-title">Login</span>
+          <span className="login__form-title">{t('login')}</span>
           <svg
             className="login__form-icon icon-log"
             viewBox="0 0 32 32"
@@ -24,7 +27,7 @@ const Login: React.FC = () => {
         </div>
         <div className="login__form-block">
           <input className="login__form-input" type="password" required />
-          <span className="login__form-title">Password</span>
+          <span className="login__form-title">{t('password')}</span>
           <svg
             className="login__form-icon icon-pass"
             height={32}
@@ -38,12 +41,12 @@ const Login: React.FC = () => {
           </svg>
         </div>
         <button className="login__form-btn" type="submit">
-          Sing In
+          {t('signIn')}
         </button>
         <p className="login__form-reg">
-          Don't have an account?{' '}
+          {t('noacc')}
           <NavLink className="login__form-link" to="/register">
-            Register
+            {t('register')}
           </NavLink>
           !
         </p>

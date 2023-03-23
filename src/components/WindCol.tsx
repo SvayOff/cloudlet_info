@@ -1,44 +1,47 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { useTranslation } from 'react-i18next';
 
 const WindCol: React.FC = () => {
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
   const weatherTodayDeg = weatherToday && weatherToday.wind.deg;
   const weatherTodayWindSpeed = weatherToday && weatherToday.wind.speed.toFixed(1);
+  const { t, i18n } = useTranslation();
+
   const getWindDirection = (degree: number | null) => {
     if (degree === null) {
       return '';
     }
     if ((degree >= 0 && degree <= 23) || (degree >= 337 && degree <= 360)) {
-      return 'North';
+      return i18n.language === 'en' ? 'North' : 'Пiвнiчний';
     }
     if (degree >= 24 && degree <= 68) {
-      return 'Northeast';
+      return i18n.language === 'en' ? 'Northeast' : 'Пн - Східний';
     }
     if (degree >= 69 && degree <= 113) {
-      return 'East';
+      return i18n.language === 'en' ? 'East' : 'Східний';
     }
     if (degree >= 114 && degree <= 158) {
-      return 'Southeast';
+      return i18n.language === 'en' ? 'Southeast' : 'Пд - Схiдний';
     }
     if (degree >= 159 && degree <= 203) {
-      return 'South';
+      return i18n.language === 'en' ? 'South' : 'Південний';
     }
     if (degree >= 204 && degree <= 248) {
-      return 'Southwest';
+      return i18n.language === 'en' ? 'Southwest' : 'Пд - Західний';
     }
     if (degree >= 249 && degree <= 293) {
-      return 'West';
+      return i18n.language === 'en' ? 'West' : 'Західний';
     }
     if (degree >= 294 && degree <= 336) {
-      return 'Northwest';
+      return i18n.language === 'en' ? 'Northwest' : 'Пн - Західний';
     }
   };
 
   return (
     <div className="information__col information__col-wind wind">
-      <h2 className="information__col-title">Wind</h2>
+      <h2 className="information__col-title">{t('windCol')}</h2>
       <div className="information__col-direction">
         <svg viewBox="0 0 64 64" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
           <path d="M32 0C14.4 0 0 14.4 0 32s14.4 32 32 32 32-14.4 32-32S49.6 0 32 0zm0 61.8C15.6 61.8 2.2 48.4 2.2 32S15.6 2.2 32 2.2 61.8 15.6 61.8 32 48.4 61.8 32 61.8z" />
@@ -66,7 +69,7 @@ const WindCol: React.FC = () => {
           </g>
           <path d="M33.777 77.582c2.7.11 4.438 1.625 4.399 3.824-.043 2.399-1.969 4.156-4.477 4.09-2.476-.062-4.058-1.758-3.953-4.223.106-2.53 1.492-3.8 4.031-3.691ZM63.414 10.21a3.555 3.555 0 0 1 2.516.981 3.574 3.574 0 0 1 1.11 2.473c.147 2.438-1.712 4.613-3.978 4.649a3.876 3.876 0 0 1-2.738-1.094 3.923 3.923 0 0 1-1.195-2.707c-.16-2.352 1.68-4.196 4.285-4.301ZM103.535 50.598c.164-2.094 2.649-4.13 4.746-3.887a3.734 3.734 0 0 1 2.324 1.348c.582.722.875 1.64.82 2.566-.222 2.04-2.472 3.684-4.804 3.512a3.116 3.116 0 0 1-1.27-.297 3.195 3.195 0 0 1-1.816-3.242Zm0 0" />
         </svg>
-        {weatherTodayWindSpeed} m/s
+        {weatherTodayWindSpeed} {t('ms')}
       </div>
     </div>
   );

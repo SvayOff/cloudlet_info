@@ -2,12 +2,19 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { setTheme } from '../redux/slices/themeSlice';
+import { setIsLangOpen } from '../redux/slices/weatherSlice';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state: RootState) => state.themeSlice.theme);
+  const isLangOpen = useSelector((state: RootState) => state.weatherSlice.isLangOpen);
+  const { i18n } = useTranslation();
 
+  const onChangeLanguage = (lng: string | undefined) => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <section className="navigation">
       <nav className="navigation__inner">
@@ -79,16 +86,24 @@ const Navigation: React.FC = () => {
               />
             </div>
           )}
-          <div className="navigation__lang">
+
+          <div
+            className={isLangOpen ? 'navigation__lang show' : 'navigation__lang'}
+            onClick={() => dispatch(setIsLangOpen(!isLangOpen))}>
             <div className="navigation__lang-active">
-              <img className="navigation__lang-img" src="/images/icons/uk.svg" alt="uk" />
+              <img
+                className="navigation__lang-img"
+                src={`/images/icons/${i18n.language === 'en' ? 'en' : 'ua'}.svg`}
+                alt="uk"
+              />
             </div>
+
             <ul className="navigation__lang-list">
-              <li className="navigation__lang-item">
-                <img className="navigation__lang-img" src="/images/icons/uk.svg" alt="uk" />
+              <li className="navigation__lang-item" onClick={() => onChangeLanguage('en')}>
+                <img className="navigation__lang-img" src="/images/icons/en.svg" alt="en" />
               </li>
-              <li className="navigation__lang-item">
-                <img className="navigation__lang-img" src="/images/icons/ukraine.svg" alt="uk" />
+              <li className="navigation__lang-item" onClick={() => onChangeLanguage('ua')}>
+                <img className="navigation__lang-img" src="/images/icons/ua.svg" alt="ua" />
               </li>
             </ul>
           </div>

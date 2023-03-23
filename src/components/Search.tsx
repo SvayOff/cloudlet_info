@@ -3,10 +3,13 @@ import axios from 'axios';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLocation, setWeatherToday, setWeatherDaily } from '../redux/slices/weatherSlice';
+import { useTranslation } from 'react-i18next';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
   const location = useSelector((state: RootState) => state.weatherSlice.location);
+
+  const { t } = useTranslation();
 
   const locationInput = React.useRef<HTMLInputElement>(null);
 
@@ -45,7 +48,7 @@ const Search: React.FC = () => {
         onChange={onChangeLocation}
         onKeyDown={searchLocation}
         value={location}
-        placeholder="Find location..."
+        placeholder={`${t('searchPlaceholder')}`}
       />
       <div className="header__form-img">
         <svg height={24} width={24} xmlns="http://www.w3.org/2000/svg">

@@ -5,6 +5,7 @@ export interface weatherState {
   weatherDaily: WeatherDaily[] | null;
   location: string;
   weatherFavorites: WeatherToday[];
+  isLangOpen: boolean;
 }
 
 export type FetchWeatherTodayWeather = {
@@ -53,6 +54,7 @@ const initialState: weatherState = {
   weatherDaily: null,
   location: '',
   weatherFavorites: [],
+  isLangOpen: false,
 };
 
 export const weatherSlice = createSlice({
@@ -89,6 +91,9 @@ export const weatherSlice = createSlice({
     setWeatherFavoritesFromLS: (state, action: PayloadAction<WeatherToday[]>) => {
       state.weatherFavorites = action.payload;
     },
+    setIsLangOpen: (state, action: PayloadAction<boolean>) => {
+      state.isLangOpen = action.payload;
+    },
   },
 });
 
@@ -99,5 +104,6 @@ export const {
   setWeatherFavorites,
   removeWeatherFromFavorites,
   setWeatherFavoritesFromLS,
+  setIsLangOpen
 } = weatherSlice.actions;
 export default weatherSlice.reducer;

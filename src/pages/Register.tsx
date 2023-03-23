@@ -1,14 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 const Register: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="register">
-      <div className="register__title">Register</div>
+      <div className="register__title">{t('titleReg')}</div>
       <form className="register__form">
         <div className="register__form-block">
           <input className="register__form-input register__form-log" type="text" required />
-          <span className="register__form-title">Create Login</span>
+          <span className="register__form-title">{t('createLogin')}</span>
           <svg
             className="register__form-icon icon-log"
             viewBox="0 0 32 32"
@@ -24,7 +27,7 @@ const Register: React.FC = () => {
         </div>
         <div className="register__form-block">
           <input className="register__form-input" type="password" required />
-          <span className="register__form-title">Create Password</span>
+          <span className="register__form-title">{t('createPassword')}</span>
           <svg
             className="register__form-icon icon-pass"
             height={32}
@@ -39,7 +42,7 @@ const Register: React.FC = () => {
         </div>
         <div className="register__form-block">
           <input className="register__form-input" type="text" required />
-          <span className="register__form-title">Create Email</span>
+          <span className="register__form-title">{t('yourEmail')}</span>
           <svg
             className="register__form-icon icon-email"
             viewBox="0 0 32 32"
@@ -57,12 +60,12 @@ const Register: React.FC = () => {
           </svg>
         </div>
         <button className="register__form-btn" type="submit">
-          Register
+          {t('register')}
         </button>
         <p className="register__form-reg">
-          Have an account?{' '}
+          {t('haveacc')}
           <NavLink className="register__form-link" to="/login">
-            Sign In
+            {t('regSignIn')}
           </NavLink>
           !
         </p>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-
+import { useTranslation } from 'react-i18next';
 
 const TempCol: React.FC = () => {
+  const { t } = useTranslation();
   const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
 
   const weatherTodayTempMax = weatherToday && Math.round(weatherToday.main.temp_max);
@@ -11,7 +12,7 @@ const TempCol: React.FC = () => {
 
   return (
     <div className="information__col information__col-temp temp">
-      <h2 className="information__col-title">Temp (Max & Min)</h2>
+      <h2 className="information__col-title">{t('tempCol')}</h2>
       <div className="information__col-max">
         <svg viewBox="0 0 32 32" xmlSpace="preserve">
           <title />
