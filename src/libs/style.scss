@@ -1031,6 +1031,29 @@
   }
 }
 
+// loading
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  @include borderDark;
+  background-color: transparent;
+  backdrop-filter: blur(3px);
+  &__decor {
+    position: absolute;
+    left: -21px;
+    top: -24px;
+    animation: loading 3s infinite ease;
+  }
+  svg {
+    transform: scale(0.4);
+  }
+}
+
 // other
 .title {
   font-size: 21px;
@@ -1487,6 +1510,15 @@ html {
   }
   to {
     transform: scale(0.4) rotateZ(30deg);
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
   }
 }
 
