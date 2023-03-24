@@ -104,6 +104,6 @@ export const {
   setWeatherFavorites,
   removeWeatherFromFavorites,
   setWeatherFavoritesFromLS,
-  setIsLangOpen
+  setIsLangOpen,
 } = weatherSlice.actions;
 export default weatherSlice.reducer;
