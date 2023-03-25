@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLocation, setWeatherToday, setWeatherDaily } from '../redux/weather/slice';
 import { selectLocation } from '../redux/weather/selectors';
@@ -7,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useSelector(selectLocation);
 
   const { t } = useTranslation();
@@ -37,6 +39,7 @@ const Search: React.FC = () => {
 
       dispatch(setLocation(''));
       locationInput.current && locationInput.current.blur();
+      navigate('/');
     }
   };
 

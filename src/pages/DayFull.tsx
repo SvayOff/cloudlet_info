@@ -4,6 +4,7 @@ import SunCol from '../components/SunCol';
 import TempCol from '../components/TempCol';
 import WindCol from '../components/WindCol';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { selectWeatherToday } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 import { getWeatherCity } from '../utils/getWeatherCity';
@@ -17,9 +18,14 @@ import { getWeatherDayName } from '../utils/getWeatherDayName';
 import { getWeatherMonth } from '../utils/getWeatherMonth';
 
 const DayFull: React.FC = () => {
+  const navigate = useNavigate();
   const weatherToday = useSelector(selectWeatherToday);
 
   const { t, i18n } = useTranslation();
+
+  if (!weatherToday) {
+    navigate('/');
+  }
 
   return (
     <section className="dayfull">
