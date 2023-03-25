@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { WeatherToday } from '../redux/slices/weatherSlice';
-import { removeWeatherFromFavorites } from '../redux/slices/weatherSlice';
+import { WeatherToday } from '../redux/weather/types';
+import { removeWeatherFromFavorites } from '../redux/weather/slice';
 import { weatherTodayImage } from './WeatherToday';
 import { useTranslation } from 'react-i18next';
 import { weatherTodaySky } from './WeatherToday';

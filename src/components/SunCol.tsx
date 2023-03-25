@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherToday } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 
 const SunCol: React.FC = () => {
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const weatherToday = useSelector(selectWeatherToday);
   const { t } = useTranslation();
 
   const weatherTodaySunrice =

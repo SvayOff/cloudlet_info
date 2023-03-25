@@ -1,11 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import FavoriteDay from '../components/FavoriteDay';
+import { useSelector } from 'react-redux';
+import { selectWeatherFavorites } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 
 const Favorites: React.FC = () => {
-  const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
+  const weatherFavorites = useSelector(selectWeatherFavorites);
+
   const { t } = useTranslation();
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherToday } from '../redux/weather/selectors';
 import { days, months } from '../components/WeatherToday';
 import { weatherTodayImage } from '../components/WeatherToday';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +11,8 @@ import TempCol from '../components/TempCol';
 import WindCol from '../components/WindCol';
 
 const DayFull: React.FC = () => {
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const weatherToday = useSelector(selectWeatherToday);
+  
   const { t, i18n } = useTranslation();
   const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);
   const weatherTodayCity = weatherToday && weatherToday.name;

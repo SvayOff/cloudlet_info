@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherToday } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 
 const TempCol: React.FC = () => {
   const { t } = useTranslation();
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const weatherToday = useSelector(selectWeatherToday);
 
   const weatherTodayTempMax = weatherToday && Math.round(weatherToday.main.temp_max);
   const weatherTodayTempMin = weatherToday && Math.round(weatherToday.main.temp_min);

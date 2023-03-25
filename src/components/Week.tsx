@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { WeatherDaily } from '../redux/slices/weatherSlice';
-import WeekDay from './WeekDay';
+import { selectWeatherDaily } from '../redux/weather/selectors';
+import { WeatherDaily } from '../redux/weather/types';
 import { useTranslation } from 'react-i18next';
+import WeekDay from './WeekDay';
 
 const Week: React.FC = () => {
-  const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
+  const weatherDaily = useSelector(selectWeatherDaily);
   const { t } = useTranslation();
 
   return (

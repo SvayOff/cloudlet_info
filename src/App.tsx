@@ -11,12 +11,8 @@ import Favorites from './pages/Favorites';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
-import {
-  setWeatherDaily,
-  setWeatherFavoritesFromLS,
-  setWeatherToday,
-} from './redux/slices/weatherSlice';
-import { setTheme } from './redux/slices/themeSlice';
+import { setWeatherDaily, setWeatherFavoritesFromLS, setWeatherToday } from './redux/weather/slice';
+import { setTheme } from './redux/theme/slice';
 
 const router = createBrowserRouter([
   {
@@ -63,24 +59,23 @@ const App: React.FC = () => {
   const isFavoriteAdded = React.useRef(false);
 
   React.useEffect(() => {
-    if (localStorage.length) {
-      const daily = JSON.parse(localStorage.getItem('daily') || 'null');
-      const location = JSON.parse(localStorage.getItem('location') || 'null');
-      const favorites = weatherFavorites && JSON.parse(localStorage.getItem('favorites') || 'null');
-      const themeFromLS = localStorage.getItem('theme');
-      if (daily) {
-        dispatch(setWeatherDaily(daily));
-      }
-      if (location) {
-        dispatch(setWeatherToday(location));
-      }
-      if (themeFromLS) {
-        dispatch(setTheme(themeFromLS));
-      }
-      if (favorites) {
-        dispatch(setWeatherFavoritesFromLS(favorites));
-        isFavoriteAdded.current = true;
-      }
+    const daily = JSON.parse(localStorage.getItem('daily') || 'null');
+    const location = JSON.parse(localStorage.getItem('location') || 'null');
+    const favorites = weatherFavorites && JSON.parse(localStorage.getItem('favorites') || 'null');
+    const themeFromLS = localStorage.getItem('theme');
+
+    if (daily) {
+      dispatch(setWeatherDaily(daily));
+    }
+    if (location) {
+      dispatch(setWeatherToday(location));
+    }
+    if (themeFromLS) {
+      dispatch(setTheme(themeFromLS));
+    }
+    if (favorites) {
+      dispatch(setWeatherFavoritesFromLS(favorites));
+      isFavoriteAdded.current = true;
     }
   }, []);
 

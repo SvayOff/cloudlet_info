@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherToday } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 
 const WindCol: React.FC = () => {
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const weatherToday = useSelector(selectWeatherToday);
+  
   const weatherTodayDeg = weatherToday && weatherToday.wind.deg;
   const weatherTodayWindSpeed = weatherToday && weatherToday.wind.speed.toFixed(1);
   const { t, i18n } = useTranslation();

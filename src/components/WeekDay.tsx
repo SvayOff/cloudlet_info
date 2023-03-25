@@ -1,15 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherDaily } from '../redux/weather/selectors';
 import { weatherTodayImage } from './WeatherToday';
 import { days } from './WeatherToday';
-import { WeatherDaily } from '../redux/slices/weatherSlice';
+import { WeatherDaily } from '../redux/weather/types';
 import { useTranslation } from 'react-i18next';
 import { weatherTodaySky } from './WeatherToday';
 
 const WeekDay: React.FC<WeatherDaily> = (day) => {
-  const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
+  const weatherDaily = useSelector(selectWeatherDaily);
+
   const { t, i18n } = useTranslation();
+  
   const weatherDailyTime = (day: WeatherDaily) => {
     return new Date(day.dt * 1000).getHours() < 10
       ? `0${new Date(day.dt * 1000).getHours()}`

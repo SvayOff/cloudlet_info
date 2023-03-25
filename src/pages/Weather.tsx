@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherToday } from '../redux/weather/selectors';
 import WeatherTop from '../components/WeatherTop';
 import Week from '../components/Week';
 import Empty from './Empty';
 
 const Weather: React.FC = () => {
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const weatherToday = useSelector(selectWeatherToday);
 
   return (
     <section className="weather">

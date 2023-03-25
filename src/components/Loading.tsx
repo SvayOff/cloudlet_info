@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loading = () => {
+const Loading: React.FC = () => {
   return (
     <div className="loading">
       <i className="loading__decor">

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { selectWeatherToday } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 
 const Humidity: React.FC = () => {
   const { t } = useTranslation();
 
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
+  const weatherToday = useSelector(selectWeatherToday);
 
   const weatherTodayHamidity = weatherToday && weatherToday.main.humidity;
 

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 

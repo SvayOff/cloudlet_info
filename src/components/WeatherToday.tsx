@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { setWeatherFavorites, removeWeatherFromFavorites } from '../redux/slices/weatherSlice';
+import { selectWeatherToday, selectWeatherFavorites } from '../redux/weather/selectors';
+import { setWeatherFavorites, removeWeatherFromFavorites } from '../redux/weather/slice';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -56,7 +56,7 @@ export const weatherTodayImage = (status: string | null) => {
       return 'cloud_danger';
   }
 };
- 
+
 export const weatherTodaySky = (lang: string, sky: string) => {
   switch (sky) {
     case 'Clouds':
@@ -93,8 +93,8 @@ const WeatherToday: React.FC = () => {
   const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
-  const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
+  const weatherToday = useSelector(selectWeatherToday);
+  const weatherFavorites = useSelector(selectWeatherFavorites);
 
   const weatherTodayCity = weatherToday && weatherToday.name;
   const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);

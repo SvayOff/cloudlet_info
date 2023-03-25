@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLocation, setWeatherToday, setWeatherDaily } from '../redux/slices/weatherSlice';
+import { setLocation, setWeatherToday, setWeatherDaily } from '../redux/weather/slice';
+import { selectLocation } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
-  const location = useSelector((state: RootState) => state.weatherSlice.location);
+  const location = useSelector(selectLocation);
 
   const { t } = useTranslation();
 
