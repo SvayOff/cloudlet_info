@@ -1,46 +1,30 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectWeatherDaily } from '../redux/weather/selectors';
-import { weatherTodayImage } from './WeatherToday';
-import { days } from './WeatherToday';
 import { WeatherDaily } from '../redux/weather/types';
 import { useTranslation } from 'react-i18next';
-import { weatherTodaySky } from './WeatherToday';
+import { getWeatherDailyDay } from '../utils/getWeatherDailyDay';
+import { getWeatherDailyTime } from '../utils/getWeatherDailyTime';
+import { getWeatherSky } from '../utils/getWeatherSky';
+import { getWeatherImage } from '../utils/getWeatherImage';
 
 const WeekDay: React.FC<WeatherDaily> = (day) => {
   const weatherDaily = useSelector(selectWeatherDaily);
 
   const { t, i18n } = useTranslation();
-  
-  const weatherDailyTime = (day: WeatherDaily) => {
-    return new Date(day.dt * 1000).getHours() < 10
-      ? `0${new Date(day.dt * 1000).getHours()}`
-      : new Date(day.dt * 1000).getHours();
-  };
-  const weatherDailyDay = (day: WeatherDaily) => {
-    if (i18n.language === 'en') {
-      return days[0].filter((dayName, index) =>
-        index === new Date(day.dt * 1000).getDay() ? dayName : null,
-      );
-    } else {
-      return days[1].filter((dayName, index) =>
-        index === new Date(day.dt * 1000).getDay() ? dayName : null,
-      );
-    }
-  };
 
   return (
     <div className="week__item">
-      <h3 className="week__item-day">{weatherDailyDay(day)}</h3>
+      <h3 className="week__item-day">{getWeatherDailyDay(day, i18n.language)}</h3>
       <time className="week__item-time">
-        {t('time')}: {weatherDailyTime(day)}.00
+        {t('time')}: {getWeatherDailyTime(day)}.00
       </time>
       <img
         className="week__item-img"
-        src={`/images/icons/${weatherDaily && weatherTodayImage(day.weather[0].main)}.svg`}
+        src={`/images/icons/${weatherDaily && getWeatherImage(day.weather[0].main)}.svg`}
         alt="wind"
       />
-      <p className="week__item-desc">{weatherTodaySky(i18n.language, day.weather[0].main)}</p>
+      <p className="week__item-desc">{getWeatherSky(i18n.language, day.weather[0].main)}</p>
       <div className="week__item-temp">
         <div className="week__item-max">
           <svg viewBox="0 0 32 32" xmlSpace="preserve">

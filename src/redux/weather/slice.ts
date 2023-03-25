@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { WeatherDaily, WeatherState, WeatherToday } from './types';
+import { WeatherDaily, WeatherState, WeatherTodayType } from './types';
 
 const initialState: WeatherState = {
   weatherToday: null,
@@ -13,7 +13,7 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setWeatherToday: (state, action: PayloadAction<WeatherToday>) => {
+    setWeatherToday: (state, action: PayloadAction<WeatherTodayType>) => {
       state.weatherToday = action.payload;
     },
     setWeatherDaily: (state, action: PayloadAction<WeatherDaily[]>) => {
@@ -22,7 +22,7 @@ export const weatherSlice = createSlice({
     setLocation: (state, action: PayloadAction<string>) => {
       state.location = action.payload;
     },
-    setWeatherFavorites: (state, action: PayloadAction<WeatherToday>) => {
+    setWeatherFavorites: (state, action: PayloadAction<WeatherTodayType>) => {
       const findWeather = state.weatherFavorites.find(
         (weather) => weather.id === action.payload.id,
       );
@@ -40,7 +40,7 @@ export const weatherSlice = createSlice({
       );
       localStorage.setItem('favorites', JSON.stringify(state.weatherFavorites));
     },
-    setWeatherFavoritesFromLS: (state, action: PayloadAction<WeatherToday[]>) => {
+    setWeatherFavoritesFromLS: (state, action: PayloadAction<WeatherTodayType[]>) => {
       state.weatherFavorites = action.payload;
     },
     setIsLangOpen: (state, action: PayloadAction<boolean>) => {

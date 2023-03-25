@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectWeatherToday } from '../redux/weather/selectors';
+import { getWeatherTempMax } from '../utils/getWeatherTempMax';
+import { getWeatherTempMin } from '../utils/getWeatherTempMin';
 import { useTranslation } from 'react-i18next';
 
 const TempCol: React.FC = () => {
   const { t } = useTranslation();
   const weatherToday = useSelector(selectWeatherToday);
-
-  const weatherTodayTempMax = weatherToday && Math.round(weatherToday.main.temp_max);
-  const weatherTodayTempMin = weatherToday && Math.round(weatherToday.main.temp_min);
 
   return (
     <div className="information__col information__col-temp temp">
@@ -34,7 +33,7 @@ const TempCol: React.FC = () => {
           />
         </svg>
         <span>
-          {weatherTodayTempMax}
+          {weatherToday && getWeatherTempMax(weatherToday)}
           <span>°C</span>
         </span>
       </div>
@@ -54,7 +53,7 @@ const TempCol: React.FC = () => {
           </g>
         </svg>
         <span>
-          {weatherTodayTempMin}
+          {weatherToday && getWeatherTempMin(weatherToday)}
           <span>°C</span>
         </span>
       </div>

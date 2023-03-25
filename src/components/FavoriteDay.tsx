@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { WeatherToday } from '../redux/weather/types';
+import { WeatherTodayType } from '../redux/weather/types';
 import { removeWeatherFromFavorites } from '../redux/weather/slice';
-import { weatherTodayImage } from './WeatherToday';
 import { useTranslation } from 'react-i18next';
-import { weatherTodaySky } from './WeatherToday';
+import { getWeatherSky } from '../utils/getWeatherSky';
+import { getWeatherImage } from '../utils/getWeatherImage';
 
-const FavoriteDay: React.FC<WeatherToday> = (day) => {
+const FavoriteDay: React.FC<WeatherTodayType> = (day) => {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -19,10 +19,10 @@ const FavoriteDay: React.FC<WeatherToday> = (day) => {
       <h3 className="favorites__item-title">{day.name}</h3>
       <img
         className="favorites__item-img"
-        src={`/images/icons/${weatherTodayImage(day && day.weather[0].main)}.svg`}
+        src={`/images/icons/${getWeatherImage(day && day.weather[0].main)}.svg`}
         alt="wind"
       />
-      <p className="favorites__item-desc">{weatherTodaySky(i18n.language, day.weather[0].main)}</p>
+      <p className="favorites__item-desc">{getWeatherSky(i18n.language, day.weather[0].main)}</p>
       <div className="favorites__item-temp">
         <div className="favorites__item-max">
           <svg viewBox="0 0 32 32" xmlSpace="preserve">

@@ -4,90 +4,15 @@ import { selectWeatherToday, selectWeatherFavorites } from '../redux/weather/sel
 import { setWeatherFavorites, removeWeatherFromFavorites } from '../redux/weather/slice';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-export const days = [
-  ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-  ['Недiля', 'Понедiлок', 'Вiвторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'],
-];
-export const months = [
-  [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'Novermber',
-    'December',
-  ],
-  [
-    'Ciчня',
-    'Лютого',
-    'Березня',
-    'Квiтня',
-    'Травня',
-    'Червня',
-    'Липня',
-    'Серпня',
-    'Вересня',
-    'Жовтня',
-    'Листопада',
-    'Грудня',
-  ],
-];
-
-export const weatherTodayImage = (status: string | null) => {
-  switch (status) {
-    case 'Clouds':
-      return 'cloud';
-    case 'Clear':
-      return 'cloud_sun';
-    case 'Snow':
-      return 'cloud_snow';
-    case 'Rain':
-      return 'cloud_rain';
-    case 'Thunderstorm':
-      return 'cloud_thunder';
-    default:
-      return 'cloud_danger';
-  }
-};
-
-export const weatherTodaySky = (lang: string, sky: string) => {
-  switch (sky) {
-    case 'Clouds':
-      return lang === 'en' ? 'Clouds' : 'Хмарно';
-    case 'Clear':
-      return lang === 'en' ? 'Clear' : 'Ясно';
-    case 'Snow':
-      return lang === 'en' ? 'Snow' : 'Снiг';
-    case 'Rain':
-      return lang === 'en' ? 'Rain' : 'Дощ';
-    case 'Thunderstorm':
-      return lang === 'en' ? 'Thunderstorm' : 'Гроза';
-    case 'Mist':
-      return lang === 'en' ? 'Mist' : 'Туман';
-    case 'Smoke':
-      return lang === 'en' ? 'Smoke' : 'Дим';
-    case 'Haze':
-    case 'Fog':
-      return lang === 'en' ? 'Haze' : 'Iмла';
-    case 'Dust':
-      return lang === 'en' ? 'Dust' : 'Пил';
-    case 'Sand':
-      return lang === 'en' ? 'Sand' : 'Пісок';
-    case 'Ash':
-      return lang === 'en' ? 'Ash' : 'Зола';
-    case 'Squall':
-      return lang === 'en' ? 'Squall' : 'Шквал';
-    case 'Tornado':
-      return lang === 'en' ? 'Tornado' : 'Торнадо';
-  }
-};
+import { getWeatherCity } from '../utils/getWeatherCity';
+import { getWeatherSky } from '../utils/getWeatherSky';
+import { getWeatherImage } from '../utils/getWeatherImage';
+import { getWeatherHours } from '../utils/getWeatherHours';
+import { getWeatherMinutes } from '../utils/getWeatherMinutes';
+import { getWeatherDay } from '../utils/getWeatherDay';
+import { getWeatherTemp } from '../utils/getWeatherTemp';
+import { getWeatherDayName } from '../utils/getWeatherDayName';
+import { getWeatherMonth } from '../utils/getWeatherMonth';
 
 const WeatherToday: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -96,28 +21,6 @@ const WeatherToday: React.FC = () => {
   const weatherToday = useSelector(selectWeatherToday);
   const weatherFavorites = useSelector(selectWeatherFavorites);
 
-  const weatherTodayCity = weatherToday && weatherToday.name;
-  const weatherTodayTemp = weatherToday && Math.round(weatherToday.main.temp);
-
-  const weatherTodayHours =
-    new Date().getHours() < 10 ? `0${new Date().getHours()}` : new Date().getHours();
-  const weatherTodayMinutes =
-    new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : new Date().getMinutes();
-  const weatherTodayDay = new Date().getDate();
-  const weatherTodayDayName = () => {
-    if (i18n.language === 'en') {
-      return days[0].filter((day, index) => (index === new Date().getDay() ? day : null));
-    } else {
-      return days[1].filter((day, index) => (index === new Date().getDay() ? day : null));
-    }
-  };
-  const weatherTodayMonth = () => {
-    if (i18n.language === 'en') {
-      return months[0].filter((month, index) => (index === new Date().getMonth() ? month : null));
-    } else {
-      return months[1].filter((month, index) => (index === new Date().getMonth() ? month : null));
-    }
-  };
   const hasWeatherInFavorites =
     weatherToday && weatherFavorites.find((weather) => weather.id === weatherToday.id);
 
@@ -136,31 +39,31 @@ const WeatherToday: React.FC = () => {
           <div className="today-time">
             {t('today')}
             <time>
-              {t('time')}: {weatherTodayHours}.{weatherTodayMinutes}
+              {t('time')}: {getWeatherHours()}.{getWeatherMinutes()}
             </time>
           </div>
           <div className="today-info">
-            <p className="today-city">{weatherTodayCity}</p>
+            <p className="today-city">{weatherToday && getWeatherCity(weatherToday)}</p>
             <time className="today-data">
-              {weatherTodayDayName()}, {weatherTodayDay} {weatherTodayMonth()}
+              {getWeatherDayName(i18n.language)}, {getWeatherDay()} {getWeatherMonth(i18n.language)}
             </time>
           </div>
         </div>
         <div className="today-how">
           <div className="today-desc">
             <span className="today-degree">
-              {weatherTodayTemp}
+              {weatherToday && getWeatherTemp(weatherToday)}
               <span>°C</span>
             </span>
             <p className="today-sky">
-              {weatherToday && weatherTodaySky(i18n.language, weatherToday.weather[0].main)}
+              {weatherToday && getWeatherSky(i18n.language, weatherToday.weather[0].main)}
             </p>
           </div>
           <img
             className="today-img"
-            src={`/images/icons/${weatherTodayImage(
-              weatherToday && weatherToday.weather[0].main,
-            )}.svg`}
+            src={`/images/icons/${
+              weatherToday && getWeatherImage(weatherToday.weather[0].main)
+            }.svg`}
             alt="rain"
           />
         </div>

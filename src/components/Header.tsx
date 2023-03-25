@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
+  
   return (
     <header className="header">
       <div className="header__inner">

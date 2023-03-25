@@ -1,8 +1,8 @@
 export interface WeatherState {
-  weatherToday: WeatherToday | null;
+  weatherToday: WeatherTodayType | null;
   weatherDaily: WeatherDaily[] | null;
   location: string;
-  weatherFavorites: WeatherToday[];
+  weatherFavorites: WeatherTodayType[];
   isLangOpen: boolean;
 }
 
@@ -13,7 +13,7 @@ export type FetchWeatherTodayWeather = {
   icon: string;
 };
 
-export type WeatherToday = {
+export type WeatherTodayType = {
   map: any;
   name: string;
   weather: FetchWeatherTodayWeather[];

@@ -2,43 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectWeatherToday } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
+import { getWindDirection } from '../utils/getWindDirection';
+import { getWeatherWindSpeed } from '../utils/getWeatherWindSpeed';
+import { getWeatherDeg } from '../utils/getWeatherDeg';
 
 const WindCol: React.FC = () => {
   const weatherToday = useSelector(selectWeatherToday);
-  
-  const weatherTodayDeg = weatherToday && weatherToday.wind.deg;
-  const weatherTodayWindSpeed = weatherToday && weatherToday.wind.speed.toFixed(1);
   const { t, i18n } = useTranslation();
-
-  const getWindDirection = (degree: number | null) => {
-    if (degree === null) {
-      return '';
-    }
-    if ((degree >= 0 && degree <= 23) || (degree >= 337 && degree <= 360)) {
-      return i18n.language === 'en' ? 'North' : 'Пiвнiчний';
-    }
-    if (degree >= 24 && degree <= 68) {
-      return i18n.language === 'en' ? 'Northeast' : 'Пн - Східний';
-    }
-    if (degree >= 69 && degree <= 113) {
-      return i18n.language === 'en' ? 'East' : 'Східний';
-    }
-    if (degree >= 114 && degree <= 158) {
-      return i18n.language === 'en' ? 'Southeast' : 'Пд - Схiдний';
-    }
-    if (degree >= 159 && degree <= 203) {
-      return i18n.language === 'en' ? 'South' : 'Південний';
-    }
-    if (degree >= 204 && degree <= 248) {
-      return i18n.language === 'en' ? 'Southwest' : 'Пд - Західний';
-    }
-    if (degree >= 249 && degree <= 293) {
-      return i18n.language === 'en' ? 'West' : 'Західний';
-    }
-    if (degree >= 294 && degree <= 336) {
-      return i18n.language === 'en' ? 'Northwest' : 'Пн - Західний';
-    }
-  };
 
   return (
     <div className="information__col information__col-wind wind">
@@ -50,7 +20,7 @@ const WindCol: React.FC = () => {
           <path d="M32 28.3c-2 0-3.7 1.6-3.7 3.7s1.6 3.7 3.7 3.7 3.7-1.6 3.7-3.7-1.7-3.7-3.7-3.7zm0 5.2c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z" />
           <path d="m49.6 31-11.9-4.6-4.6-12c-.2-.4-.6-.7-1-.7-.5 0-.9.3-1 .7l-4.6 12-12 4.6c-.4.2-.7.6-.7 1 0 .5.3.9.7 1l12 4.6 4.5 12c.2.4.6.7 1 .7.5 0 .9-.3 1-.7l4.6-12 12-4.6c.4-.2.7-.6.7-1s-.3-.9-.7-1zm-13.2 4.7c-.3.1-.5.3-.6.6L32 46.1l-3.7-9.7c-.1-.3-.3-.5-.6-.6L17.9 32l9.8-3.7c.3-.1.5-.3.6-.6l3.7-9.8 3.7 9.8c.1.3.3.5.6.6L46 32l-9.6 3.7z" />
         </svg>
-        {getWindDirection(weatherTodayDeg)}
+        {weatherToday && getWindDirection(getWeatherDeg(weatherToday), i18n.language)}
       </div>
       <div className="information__col-speed">
         <svg xmlns="http://www.w3.org/2000/svg" width={25} height={25} viewBox="0 0 114 89">
@@ -70,7 +40,7 @@ const WindCol: React.FC = () => {
           </g>
           <path d="M33.777 77.582c2.7.11 4.438 1.625 4.399 3.824-.043 2.399-1.969 4.156-4.477 4.09-2.476-.062-4.058-1.758-3.953-4.223.106-2.53 1.492-3.8 4.031-3.691ZM63.414 10.21a3.555 3.555 0 0 1 2.516.981 3.574 3.574 0 0 1 1.11 2.473c.147 2.438-1.712 4.613-3.978 4.649a3.876 3.876 0 0 1-2.738-1.094 3.923 3.923 0 0 1-1.195-2.707c-.16-2.352 1.68-4.196 4.285-4.301ZM103.535 50.598c.164-2.094 2.649-4.13 4.746-3.887a3.734 3.734 0 0 1 2.324 1.348c.582.722.875 1.64.82 2.566-.222 2.04-2.472 3.684-4.804 3.512a3.116 3.116 0 0 1-1.27-.297 3.195 3.195 0 0 1-1.816-3.242Zm0 0" />
         </svg>
-        {weatherTodayWindSpeed} {t('ms')}
+        {weatherToday && getWeatherWindSpeed(weatherToday)} {t('ms')}
       </div>
     </div>
   );
