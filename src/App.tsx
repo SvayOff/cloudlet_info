@@ -1,8 +1,4 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './libs/style.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './redux/store';
 import HomeLayout from './layouts/HomeLayout';
 import Weather from './pages/Weather';
 import DayFull from './pages/DayFull';
@@ -11,7 +7,15 @@ import Favorites from './pages/Favorites';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
+import './libs/style.scss';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { setWeatherDaily, setWeatherFavoritesFromLS, setWeatherToday } from './redux/weather/slice';
+import {
+  selectWeatherToday,
+  selectWeatherDaily,
+  selectWeatherFavorites,
+} from './redux/weather/selectors';
 import { setTheme } from './redux/theme/slice';
 
 const router = createBrowserRouter([
@@ -53,9 +57,9 @@ const router = createBrowserRouter([
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const weatherToday = useSelector((state: RootState) => state.weatherSlice.weatherToday);
-  const weatherDaily = useSelector((state: RootState) => state.weatherSlice.weatherDaily);
-  const weatherFavorites = useSelector((state: RootState) => state.weatherSlice.weatherFavorites);
+  const weatherToday = useSelector(selectWeatherToday);
+  const weatherDaily = useSelector(selectWeatherDaily);
+  const weatherFavorites = useSelector(selectWeatherFavorites);
   const isFavoriteAdded = React.useRef(false);
 
   React.useEffect(() => {

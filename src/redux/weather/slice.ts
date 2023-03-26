@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { WeatherDaily, WeatherState, WeatherTodayType } from './types';
+import axios from 'axios';
 
 const initialState: WeatherState = {
   weatherToday: null,
@@ -8,6 +9,11 @@ const initialState: WeatherState = {
   weatherFavorites: [],
   isLangOpen: false,
 };
+
+export const getWeatherData = createAsyncThunk('weather/getWeatherData', async (url: string) => {
+  const response = await axios.get(url);
+  return response.data;
+});
 
 export const weatherSlice = createSlice({
   name: 'weather',

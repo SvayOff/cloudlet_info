@@ -2,12 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLocation, setWeatherToday, setWeatherDaily } from '../redux/weather/slice';
+import {
+  setLocation,
+  setWeatherToday,
+  setWeatherDaily,
+  getWeatherData,
+} from '../redux/weather/slice';
 import { selectLocation } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
+import { AppDispatch } from '../redux/store';
 
 const Search: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useSelector(selectLocation);
 
@@ -29,16 +35,22 @@ const Search: React.FC = () => {
 
   const searchLocation: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
-      axios.get(urlWeatherDay).then((response) => {
-        dispatch(setWeatherToday(response.data));
+      dispatch(getWeatherData(urlWeatherDay)).then((res) => {
+        dispatch(setWeatherToday(res.payload));
       });
 
       axios.get(urlWeatherDeily).then((response) => {
         dispatch(setWeatherDaily(response.data.list));
       });
 
+      dispatch(getWeatherData(urlWeatherDeily)).then((res) => {
+        console.log(res.payload.list);
+      });
+
       dispatch(setLocation(''));
+
       locationInput.current && locationInput.current.blur();
+      
       navigate('/');
     }
   };
