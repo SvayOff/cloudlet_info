@@ -15,7 +15,7 @@ export const getWeatherData = createAsyncThunk('weather/getWeatherData', async (
   return response.data;
 });
 
-export const weatherSlice = createSlice({
+const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
