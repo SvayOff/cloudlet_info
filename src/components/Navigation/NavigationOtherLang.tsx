@@ -13,6 +13,18 @@ const NavigationOtherLang: React.FC = () => {
     i18n.changeLanguage(lng);
   };
 
+  React.useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      !event.target.className.includes('lang') && dispatch(setIsLangOpen(false));
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  });
+
   return (
     <div
       className={isLangOpen ? 'navigation__lang show' : 'navigation__lang'}

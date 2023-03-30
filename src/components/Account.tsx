@@ -11,7 +11,17 @@ const Account: React.FC = () => {
   );
   const authorized = useSelector((state: RootState) => state.authorizationSlice.authorized);
 
-  console.log(authorized);
+  React.useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      !event.target.className.includes('account') && dispatch(setIsVisibleLogout(false));
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  });
 
   return (
     <div className="header__account">

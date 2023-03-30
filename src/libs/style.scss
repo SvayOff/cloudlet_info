@@ -179,6 +179,7 @@
         width: 20px;
         fill: #000;
         transform: translateY(1px);
+        pointer-events: none;
       }
     }
     &-logout {
@@ -252,6 +253,7 @@
       }
       svg {
         fill: rgba($color: #000000, $alpha: 0.7);
+        pointer-events: none;
       }
       .home-img {
         transform: scale(1.3);

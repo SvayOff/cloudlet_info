@@ -43,14 +43,10 @@ const Search: React.FC = () => {
         dispatch(setWeatherDaily(response.data.list));
       });
 
-      dispatch(getWeatherData(urlWeatherDeily)).then((res) => {
-        console.log(res.payload.list);
-      });
-
       dispatch(setLocation(''));
 
       locationInput.current && locationInput.current.blur();
-      
+
       navigate('/');
     }
   };
