@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { setIsVisibleLogout } from '../redux/authorization/slice';
+import { setIsVisibleLogout, setLogout } from '../redux/authorization/slice';
 import { NavLink } from 'react-router-dom';
 
 const Account: React.FC = () => {
@@ -9,6 +9,9 @@ const Account: React.FC = () => {
   const isVisibleLogout = useSelector(
     (state: RootState) => state.authorizationSlice.isVisibleLogout,
   );
+  const authorized = useSelector((state: RootState) => state.authorizationSlice.authorized);
+
+  console.log(authorized);
 
   return (
     <div className="header__account">
@@ -33,7 +36,10 @@ const Account: React.FC = () => {
           </g>
         </svg>
       </NavLink>
-      <button className={isVisibleLogout ? "header__account-logout show" : "header__account-logout"} type="button">
+      <button
+        className={isVisibleLogout ? 'header__account-logout show' : 'header__account-logout'}
+        onClick={() => dispatch(setLogout(!authorized))}
+        type="button">
         Logout
       </button>
     </div>

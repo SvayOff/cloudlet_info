@@ -4,7 +4,7 @@ import { AuthorizationState } from './types';
 const initialState: AuthorizationState = {
   usersBase: [],
   registered: false,
-  authorized: true,
+  authorized: false,
   registrLogin: '',
   registrPassword: '',
   registrEmail: '',
@@ -86,6 +86,10 @@ const authorizationSlice = createSlice({
     setIsVisibleLogout(state, action: PayloadAction<boolean>) {
       state.isVisibleLogout = action.payload;
     },
+
+    setLogout(state, action: PayloadAction<boolean>) {
+      state.authorized = action.payload;
+    },
   },
 });
 
@@ -98,5 +102,6 @@ export const {
   setAuthLogin,
   setAuthPassword,
   setIsVisibleLogout,
+  setLogout,
 } = authorizationSlice.actions;
 export default authorizationSlice.reducer;
