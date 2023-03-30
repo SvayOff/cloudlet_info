@@ -1,16 +1,53 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import {
+  registration,
+  setRegistrLogin,
+  setRegistrEmail,
+  setRegistrPassword,
+} from '../redux/authorization/slice';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 const Register: React.FC = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { usersBase, registrLogin, registrPassword, registrEmail } = useSelector(
+    (state: RootState) => state.authorizationSlice,
+  );
+
+  console.log('Login ' + registrLogin);
+  console.dir('Users Base  ' + usersBase);
+
+  const onClickRegistration = () => {
+    dispatch(registration());
+  };
+
+  const onChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setRegistrLogin(event.target.value));
+  };
+
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setRegistrPassword(event.target.value));
+  };
+
+  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setRegistrEmail(event.target.value));
+  };
 
   return (
     <section className="register">
       <div className="register__title">{t('titleReg')}</div>
       <form className="register__form">
         <div className="register__form-block">
-          <input className="register__form-input register__form-log" type="text" required />
+          <input
+            className="register__form-input register__form-log"
+            onChange={onChangeLogin}
+            value={registrLogin}
+            type="text"
+            required
+          />
           <span className="register__form-title">{t('createLogin')}</span>
           <svg
             className="register__form-icon icon-log"
@@ -26,7 +63,13 @@ const Register: React.FC = () => {
           </svg>
         </div>
         <div className="register__form-block">
-          <input className="register__form-input" type="password" required />
+          <input
+            className="register__form-input"
+            onChange={onChangePassword}
+            value={registrPassword}
+            type="password"
+            required
+          />
           <span className="register__form-title">{t('createPassword')}</span>
           <svg
             className="register__form-icon icon-pass"
@@ -41,7 +84,13 @@ const Register: React.FC = () => {
           </svg>
         </div>
         <div className="register__form-block">
-          <input className="register__form-input" type="text" required />
+          <input
+            className="register__form-input"
+            onChange={onChangeEmail}
+            value={registrEmail}
+            type="text"
+            required
+          />
           <span className="register__form-title">{t('yourEmail')}</span>
           <svg
             className="register__form-icon icon-email"
@@ -59,7 +108,7 @@ const Register: React.FC = () => {
             </g>
           </svg>
         </div>
-        <button className="register__form-btn" type="submit">
+        <button className="register__form-btn" type="button" onClick={onClickRegistration}>
           {t('register')}
         </button>
         <p className="register__form-reg">

@@ -1,10 +1,15 @@
 export interface AuthorizationState {
   usersBase: User[];
-  user: User;
+  registered: boolean;
+  authorized: boolean;
+  registrLogin: string;
+  registrPassword: string;
+  registrEmail: string;
 }
 
 export type User = {
-  email: string;
+  login: string;
   password: string;
+  email: string;
   inBase: boolean;
 };
