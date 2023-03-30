@@ -1,16 +1,46 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { authorization, setAuthLogin, setAuthPassword } from '../redux/authorization/slice';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { authLogin, authPassword, authorized } = useSelector(
+    (state: RootState) => state.authorizationSlice,
+  );
   const { t } = useTranslation();
+
+  const onClickAuthorization = () => {
+    dispatch(authorization());
+  };
+
+  const onChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAuthLogin(event.target.value));
+  };
+
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAuthPassword(event.target.value));
+  };
+
+  if (authorized) {
+    navigate('/');
+  }
 
   return (
     <section className="login">
       <div className="login__title">{t('signIn')}</div>
       <form className="login__form">
         <div className="login__form-block">
-          <input className="login__form-input login__form-log" type="text" required />
+          <input
+            className="login__form-input login__form-log"
+            onChange={onChangeLogin}
+            value={authLogin}
+            type="text"
+            required
+          />
           <span className="login__form-title">{t('login')}</span>
           <svg
             className="login__form-icon icon-log"
@@ -26,7 +56,13 @@ const Login: React.FC = () => {
           </svg>
         </div>
         <div className="login__form-block">
-          <input className="login__form-input" type="password" required />
+          <input
+            className="login__form-input"
+            onChange={onChangePassword}
+            value={authPassword}
+            type="password"
+            required
+          />
           <span className="login__form-title">{t('password')}</span>
           <svg
             className="login__form-icon icon-pass"
@@ -40,7 +76,7 @@ const Login: React.FC = () => {
             </g>
           </svg>
         </div>
-        <button className="login__form-btn" type="submit">
+        <button className="login__form-btn" onClick={onClickAuthorization} type="button">
           {t('signIn')}
         </button>
         <p className="login__form-reg">

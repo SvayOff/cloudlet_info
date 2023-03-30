@@ -13,12 +13,9 @@ import { NavLink } from 'react-router-dom';
 const Register: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { usersBase, registrLogin, registrPassword, registrEmail } = useSelector(
+  const { registrLogin, registrPassword, registrEmail } = useSelector(
     (state: RootState) => state.authorizationSlice,
   );
-
-  console.log('Login ' + registrLogin);
-  console.dir('Users Base  ' + usersBase);
 
   const onClickRegistration = () => {
     dispatch(registration());

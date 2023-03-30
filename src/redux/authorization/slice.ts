@@ -8,6 +8,8 @@ const initialState: AuthorizationState = {
   registrLogin: '',
   registrPassword: '',
   registrEmail: '',
+  authLogin: '',
+  authPassword: '',
 };
 
 const authorizationSlice = createSlice({
@@ -56,9 +58,39 @@ const authorizationSlice = createSlice({
     setRegistrPassword(state, action: PayloadAction<string>) {
       state.registrPassword = action.payload;
     },
+
+    authorization(state) {
+      state.usersBase.find((user) => {
+        if (user.login === state.authLogin && user.password === state.authPassword) {
+          state.authorized = true;
+
+          state.authLogin = '';
+          state.authPassword = '';
+
+          return user;
+        } else {
+          state.authorized = false;
+        }
+      });
+    },
+
+    setAuthLogin(state, action: PayloadAction<string>) {
+      state.authLogin = action.payload;
+    },
+
+    setAuthPassword(state, action: PayloadAction<string>) {
+      state.authPassword = action.payload;
+    },
   },
 });
 
-export const { registration, setRegistrLogin, setRegistrEmail, setRegistrPassword } =
-  authorizationSlice.actions;
+export const {
+  registration,
+  setRegistrLogin,
+  setRegistrEmail,
+  setRegistrPassword,
+  authorization,
+  setAuthLogin,
+  setAuthPassword,
+} = authorizationSlice.actions;
 export default authorizationSlice.reducer;

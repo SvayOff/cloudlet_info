@@ -5,6 +5,8 @@ export interface AuthorizationState {
   registrLogin: string;
   registrPassword: string;
   registrEmail: string;
+  authLogin: string;
+  authPassword: string;
 }
 
 export type User = {
