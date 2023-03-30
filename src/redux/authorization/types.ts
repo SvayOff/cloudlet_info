@@ -7,6 +7,7 @@ export interface AuthorizationState {
   registrEmail: string;
   authLogin: string;
   authPassword: string;
+  isVisibleLogout: boolean;
 }
 
 export type User = {
