@@ -8,7 +8,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const Login: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authLogin, authPassword, authorized } = useSelector(
+  const { authLogin, authPassword, authorized, errorDataSignIn, isUserFounded } = useSelector(
     (state: RootState) => state.authorizationSlice,
   );
   const { t } = useTranslation();
@@ -76,6 +76,12 @@ const Login: React.FC = () => {
             </g>
           </svg>
         </div>
+        <p className={errorDataSignIn ? 'login__form-error show' : 'login__form-error'}>
+          {t('loginError')}
+        </p>
+        <p className={isUserFounded ? 'login__form-isfounded' : 'login__form-isfounded show'}>
+          {t('loginIsFounded')}
+        </p>
         <button className="login__form-btn" onClick={onClickAuthorization} type="button">
           {t('signIn')}
         </button>

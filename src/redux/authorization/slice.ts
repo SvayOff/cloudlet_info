@@ -10,6 +10,8 @@ const initialState: AuthorizationState = {
   registrEmail: '',
   authLogin: '',
   authPassword: '',
+  errorDataSignIn: false,
+  isUserFounded: true,
   isVisibleLogout: false,
 };
 
@@ -34,9 +36,11 @@ const authorizationSlice = createSlice({
       if (userFound) {
         alert('Користувач з таким Логiном чи Емейлом вже присутнiй!');
       } else if (state.registrLogin.length < 5) {
-        alert('Введiть Логiн який складається з 5 букв та бiльше!');
+        alert('Введiть Логiн який складається з 5 букв i бiльше!');
       } else if (state.registrPassword.length < 5) {
         alert('Введiть Пароль який складається з 5 букв та бiльше!');
+      } else if (state.registrEmail.length < 1) {
+        alert('Введiть Емейл який бiльше одного символа, i мiстить в собi "@ та ."!');
       } else {
         newUser.inBase = true;
         state.usersBase.push(newUser);
@@ -65,16 +69,22 @@ const authorizationSlice = createSlice({
     },
 
     authorization(state) {
+      if (state.usersBase.length <= 0) {
+        state.isUserFounded = false;
+      }
       state.usersBase.find((user) => {
-        if (user.login === state.authLogin && user.password === state.authPassword) {
-          state.authorized = true;
-
+        if (user.login !== state.authLogin) {
+          state.isUserFounded = false;
+          state.errorDataSignIn = false;
+        } else if (user.login === state.authLogin && user.password !== state.authPassword) {
+          state.isUserFounded = true;
+          state.errorDataSignIn = true;
+        } else if (user.login === state.authLogin && user.password === state.authPassword) {
           state.authLogin = '';
           state.authPassword = '';
-
-          return user;
-        } else {
-          state.authorized = false;
+          state.authorized = true;
+          state.isUserFounded = true;
+          state.errorDataSignIn = false;
         }
       });
     },
@@ -85,6 +95,10 @@ const authorizationSlice = createSlice({
 
     setAuthPassword(state, action: PayloadAction<string>) {
       state.authPassword = action.payload;
+    },
+
+    setErrorDataSignIn(state, action: PayloadAction<boolean>) {
+      state.errorDataSignIn = action.payload;
     },
 
     setIsVisibleLogout(state, action: PayloadAction<boolean>) {
@@ -106,6 +120,7 @@ export const {
   authorization,
   setAuthLogin,
   setAuthPassword,
+  setErrorDataSignIn,
   setIsVisibleLogout,
   setLogout,
 } = authorizationSlice.actions;

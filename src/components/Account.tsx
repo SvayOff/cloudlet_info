@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { setIsVisibleLogout, setLogout } from '../redux/authorization/slice';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Account: React.FC = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const isVisibleLogout = useSelector(
     (state: RootState) => state.authorizationSlice.isVisibleLogout,
   );
@@ -50,7 +52,7 @@ const Account: React.FC = () => {
         className={isVisibleLogout ? 'header__account-logout show' : 'header__account-logout'}
         onClick={() => dispatch(setLogout(!authorized))}
         type="button">
-        Logout
+        {t('logout')}
       </button>
     </div>
   );
