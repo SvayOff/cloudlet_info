@@ -1,12 +1,12 @@
 import React from 'react';
-import { RootState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRegistered } from '../redux/authorization/slice';
+import { selectRegistered } from '../redux/authorization/selectors';
 import { useTranslation } from 'react-i18next';
 
 const RegisterPopup: React.FC = () => {
   const dispatch = useDispatch();
-  const registered = useSelector((state: RootState) => state.authorizationSlice.registered);
+  const registered = useSelector(selectRegistered);
 
   const { t } = useTranslation();
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { selectIsLangOpen } from '../../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 import { setIsLangOpen } from '../../redux/weather/slice';
 
 const NavigationOtherLang: React.FC = () => {
   const dispatch = useDispatch();
-  const isLangOpen = useSelector((state: RootState) => state.weatherSlice.isLangOpen);
+  const isLangOpen = useSelector(selectIsLangOpen);
   const { i18n } = useTranslation();
 
   const onChangeLanguage = (lng: string | undefined) => {

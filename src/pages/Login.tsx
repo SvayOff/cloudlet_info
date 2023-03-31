@@ -1,16 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import { authorization, setAuthLogin, setAuthPassword } from '../redux/authorization/slice';
+import { selectAuthorizationSlice } from '../redux/authorization/selectors';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authLogin, authPassword, authorized, errorDataSignIn, isUserFounded } = useSelector(
-    (state: RootState) => state.authorizationSlice,
-  );
+  const { authLogin, authPassword, authorized, errorDataSignIn, isUserFounded } =
+    useSelector(selectAuthorizationSlice);
   const { t } = useTranslation();
 
   const onClickAuthorization = () => {

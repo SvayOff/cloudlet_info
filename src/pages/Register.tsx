@@ -1,22 +1,20 @@
 import React from 'react';
 import RegisterPopup from '../components/RegisterPopup';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import {
   registration,
   setRegistrLogin,
   setRegistrEmail,
   setRegistrPassword,
 } from '../redux/authorization/slice';
+import { selectAuthorizationSlice } from '../redux/authorization/selectors';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { registrLogin, registrPassword, registrEmail } = useSelector(
-    (state: RootState) => state.authorizationSlice,
-  );
+  const { registrLogin, registrPassword, registrEmail } = useSelector(selectAuthorizationSlice);
 
   const onClickRegistration = () => {
     dispatch(registration());

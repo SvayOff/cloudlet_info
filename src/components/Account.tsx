@@ -1,17 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
 import { setIsVisibleLogout, setLogout } from '../redux/authorization/slice';
+import { selectAuthorized, selectIsVisibleLogout } from '../redux/authorization/selectors';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const Account: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const isVisibleLogout = useSelector(
-    (state: RootState) => state.authorizationSlice.isVisibleLogout,
-  );
-  const authorized = useSelector((state: RootState) => state.authorizationSlice.authorized);
+  const isVisibleLogout = useSelector(selectIsVisibleLogout);
+  const authorized = useSelector(selectAuthorized);
 
   React.useEffect(() => {
     const handleClickOutside = (event: any) => {
