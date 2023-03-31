@@ -60,6 +60,10 @@ const authorizationSlice = createSlice({
       state.registrPassword = action.payload;
     },
 
+    setRegistered(state, action: PayloadAction<boolean>) {
+      state.registered = action.payload;
+    },
+
     authorization(state) {
       state.usersBase.find((user) => {
         if (user.login === state.authLogin && user.password === state.authPassword) {
@@ -98,6 +102,7 @@ export const {
   setRegistrLogin,
   setRegistrEmail,
   setRegistrPassword,
+  setRegistered,
   authorization,
   setAuthLogin,
   setAuthPassword,

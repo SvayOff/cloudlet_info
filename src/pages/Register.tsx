@@ -1,4 +1,5 @@
 import React from 'react';
+import RegisterPopup from '../components/RegisterPopup';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import {
@@ -116,6 +117,7 @@ const Register: React.FC = () => {
           !
         </p>
       </form>
+      <RegisterPopup />
     </section>
   );
 };
