@@ -24,9 +24,11 @@ const Login: React.FC = () => {
     dispatch(setAuthPassword(event.target.value));
   };
 
-  if (authorized) {
-    navigate('/');
-  }
+  React.useEffect(() => {
+    if (authorized) {
+      navigate('/');
+    }
+  }, [authorized, navigate]);
 
   return (
     <section className="login">

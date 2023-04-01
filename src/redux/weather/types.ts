@@ -4,6 +4,7 @@ export interface WeatherState {
   location: string;
   weatherFavorites: WeatherTodayType[];
   isLangOpen: boolean;
+  status: Status;
 }
 
 export type FetchWeatherTodayWeather = {
@@ -46,3 +47,9 @@ export type WeatherDaily = {
   };
   weather: FetchWeatherTodayWeather[];
 };
+
+export enum Status {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}

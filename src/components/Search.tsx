@@ -8,7 +8,7 @@ import {
   setWeatherDaily,
   getWeatherData,
 } from '../redux/weather/slice';
-import { selectLocation } from '../redux/weather/selectors';
+import { selectLocation, selectStatus } from '../redux/weather/selectors';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '../redux/store';
 
@@ -16,6 +16,7 @@ const Search: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useSelector(selectLocation);
+  const status = useSelector(selectStatus);
 
   const { t } = useTranslation();
 
@@ -50,6 +51,12 @@ const Search: React.FC = () => {
       navigate('/');
     }
   };
+
+  React.useEffect(() => {
+    if (status === 'error') {
+      navigate('/error');
+    }
+  }, [status]);
 
   return (
     <div className="header__form">

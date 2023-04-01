@@ -5,3 +5,4 @@ export const selectLocation = (state: RootState) => state.weatherSlice.location;
 export const selectWeatherFavorites = (state: RootState) => state.weatherSlice.weatherFavorites;
 export const selectWeatherDaily = (state: RootState) => state.weatherSlice.weatherDaily;
 export const selectIsLangOpen = (state: RootState) => state.weatherSlice.isLangOpen;
+export const selectStatus = (state: RootState) => state.weatherSlice.status;

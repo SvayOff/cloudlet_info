@@ -276,19 +276,19 @@
       }
     }
     &-home {
-      a {
+      svg {
         margin-top: 10px;
         margin-left: 11px;
       }
     }
     &-maps {
-      a {
+      svg {
         margin-top: 7px;
         margin-left: 7.5px;
       }
     }
     &-favorite {
-      a {
+      svg {
         margin-top: 7.5px;
         margin-left: 9.5px;
       }
@@ -518,6 +518,7 @@
     @include borderDark;
     cursor: default;
     transition: all 0.3s ease;
+    will-change: transform;
     &:hover {
       background-color: #fff;
       transform: scale(0.95);
@@ -555,15 +556,13 @@
     }
     &-sunrise {
       margin-bottom: 10px;
-      svg {
-        transform: translateX(2px);
-      }
     }
     &-sunrise,
     &-sunset {
       svg {
         width: 30px;
         margin-right: 20px;
+        pointer-events: none;
       }
       display: flex;
       align-items: center;
@@ -580,6 +579,7 @@
       svg {
         width: 25px;
         margin-right: 15px;
+        pointer-events: none;
       }
       span {
         & > span {
@@ -632,6 +632,7 @@
     padding: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
+    will-change: transform;
     &:hover {
       background-color: #fff;
       transform: scale(0.95);
@@ -660,6 +661,7 @@
       flex-direction: column;
       svg {
         width: 20px;
+        pointer-events: none;
       }
     }
   }
@@ -893,6 +895,7 @@
     text-align: center;
     padding: 15px;
     transition: all 0.3s ease;
+    will-change: transform;
     &:hover {
       background-color: #fff;
       transform: scale(0.95);
@@ -923,6 +926,7 @@
       flex-direction: column;
       svg {
         width: 20px;
+        pointer-events: none;
       }
     }
     &-max {

@@ -69,7 +69,8 @@ const App: React.FC = () => {
 
   React.useEffect(() => {
     const daily = JSON.parse(localStorage.getItem('daily') || 'null');
-    const location = JSON.parse(localStorage.getItem('location') || 'null');
+
+    const locationJSON = localStorage.getItem('location');
     const favorites = weatherFavorites && JSON.parse(localStorage.getItem('favorites') || 'null');
     const themeFromLS = localStorage.getItem('theme');
     const usersBase = JSON.parse(localStorage.getItem('usersBase') || 'null');
@@ -79,8 +80,12 @@ const App: React.FC = () => {
     if (daily) {
       dispatch(setWeatherDaily(daily));
     }
-    if (location) {
-      dispatch(setWeatherToday(location));
+    if (locationJSON !== undefined) {
+      const location = JSON.parse(locationJSON || 'null');
+
+      if (location) {
+        dispatch(setWeatherToday(location));
+      }
     }
 
     if (themeFromLS) {

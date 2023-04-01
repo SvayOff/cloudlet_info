@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { WeatherDaily, WeatherState, WeatherTodayType } from './types';
+import { WeatherDaily, WeatherState, WeatherTodayType, Status } from './types';
 import axios from 'axios';
 
 const initialState: WeatherState = {
@@ -8,6 +8,7 @@ const initialState: WeatherState = {
   location: '',
   weatherFavorites: [],
   isLangOpen: false,
+  status: Status.LOADING,
 };
 
 export const getWeatherData = createAsyncThunk('weather/getWeatherData', async (url: string) => {
@@ -52,6 +53,17 @@ const weatherSlice = createSlice({
     setIsLangOpen: (state, action: PayloadAction<boolean>) => {
       state.isLangOpen = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getWeatherData.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(getWeatherData.fulfilled, (state) => {
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(getWeatherData.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
   },
 });
 
