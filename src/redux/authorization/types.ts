@@ -7,6 +7,7 @@ export interface AuthorizationState {
   registrEmail: string;
   authLogin: string;
   authPassword: string;
+  authorizedUser: User;
   errorDataSignIn: boolean;
   isUserFounded: boolean;
   isVisibleLogout: boolean;

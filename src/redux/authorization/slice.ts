@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthorizationState } from './types';
+import { AuthorizationState, User } from './types';
 
 const initialState: AuthorizationState = {
   usersBase: [],
@@ -10,6 +10,12 @@ const initialState: AuthorizationState = {
   registrEmail: '',
   authLogin: '',
   authPassword: '',
+  authorizedUser: {
+    login: '',
+    password: '',
+    email: '',
+    inBase: false,
+  },
   errorDataSignIn: false,
   isUserFounded: true,
   isVisibleLogout: false,
@@ -50,6 +56,8 @@ const authorizationSlice = createSlice({
         state.registrPassword = '';
         state.registrEmail = '';
       }
+
+      localStorage.setItem('usersBase', JSON.stringify(state.usersBase));
     },
 
     setRegistrLogin(state, action: PayloadAction<string>) {
@@ -85,6 +93,9 @@ const authorizationSlice = createSlice({
           state.authorized = true;
           state.isUserFounded = true;
           state.errorDataSignIn = false;
+          state.authorizedUser = user;
+
+          localStorage.setItem('authorizedUser', JSON.stringify(state.authorizedUser));
         }
       });
     },
@@ -108,6 +119,14 @@ const authorizationSlice = createSlice({
     setLogout(state, action: PayloadAction<boolean>) {
       state.authorized = action.payload;
     },
+
+    setUsersBaseFromLS(state, action: PayloadAction<User[]>) {
+      state.usersBase = action.payload;
+    },
+
+    setAuthorizedUserFromLS(state, action: PayloadAction<User>) {
+      state.authorizedUser = action.payload;
+    },
   },
 });
 
@@ -123,5 +142,7 @@ export const {
   setErrorDataSignIn,
   setIsVisibleLogout,
   setLogout,
+  setUsersBaseFromLS,
+  setAuthorizedUserFromLS,
 } = authorizationSlice.actions;
 export default authorizationSlice.reducer;

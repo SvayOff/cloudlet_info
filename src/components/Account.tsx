@@ -1,7 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsVisibleLogout, setLogout } from '../redux/authorization/slice';
-import { selectAuthorized, selectIsVisibleLogout } from '../redux/authorization/selectors';
+import {
+  selectAuthorized,
+  selectAuthorizedUser,
+  selectIsVisibleLogout,
+} from '../redux/authorization/selectors';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +14,7 @@ const Account: React.FC = () => {
   const { t } = useTranslation();
   const isVisibleLogout = useSelector(selectIsVisibleLogout);
   const authorized = useSelector(selectAuthorized);
+  const authorizedUser = useSelector(selectAuthorizedUser);
 
   React.useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -45,7 +50,9 @@ const Account: React.FC = () => {
             />
           </g>
         </svg>
+        <span className="header__account-login">{authorizedUser.login}</span>
       </NavLink>
+
       <button
         className={isVisibleLogout ? 'header__account-logout show' : 'header__account-logout'}
         onClick={() => dispatch(setLogout(!authorized))}
