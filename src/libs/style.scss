@@ -161,6 +161,7 @@
   }
   &__account {
     position: relative;
+
     &-user {
       display: flex;
       align-items: center;
@@ -172,7 +173,9 @@
       transition: all 0.3s ease;
       @include borderDark;
       @include shadow;
+      cursor: pointer;
       will-change: transform;
+      background-color: transparent;
       &:hover {
         background-color: #fff;
         transform: translateY(10px) rotateZ(10deg);
@@ -465,6 +468,7 @@
       transform: rotateZ(10deg) scale(0.9);
       svg {
         fill: red;
+        pointer-events: none;
       }
     }
     svg {
@@ -476,15 +480,12 @@
       transition: all 0.3s ease;
     }
     &-remove {
-      &:hover {
-        path {
-        }
-      }
       path {
         stroke-width: 2px;
       }
       svg {
         stroke: #000;
+        pointer-events: none;
       }
     }
   }

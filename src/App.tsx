@@ -11,13 +11,17 @@ import './libs/style.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWeatherDaily, setWeatherFavoritesFromLS, setWeatherToday } from './redux/weather/slice';
-import { setUsersBaseFromLS, setAuthorizedUserFromLS } from './redux/authorization/slice';
+import { setTheme } from './redux/theme/slice';
+import {
+  setUsersBaseFromLS,
+  setAuthorizedUserFromLS,
+  setAuthorized,
+} from './redux/authorization/slice';
 import {
   selectWeatherToday,
   selectWeatherDaily,
   selectWeatherFavorites,
 } from './redux/weather/selectors';
-import { setTheme } from './redux/theme/slice';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +74,7 @@ const App: React.FC = () => {
     const themeFromLS = localStorage.getItem('theme');
     const usersBase = JSON.parse(localStorage.getItem('usersBase') || 'null');
     const authorizedUser = JSON.parse(localStorage.getItem('authorizedUser') || 'null');
+    const authorized = JSON.parse(localStorage.getItem('authorized') || 'null');
 
     if (daily) {
       dispatch(setWeatherDaily(daily));
@@ -92,6 +97,8 @@ const App: React.FC = () => {
     if (authorizedUser) {
       dispatch(setAuthorizedUserFromLS(authorizedUser));
     }
+
+    dispatch(setAuthorized(authorized));
   }, []);
 
   React.useEffect(() => {

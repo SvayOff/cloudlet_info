@@ -1,20 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsVisibleLogout, setLogout } from '../redux/authorization/slice';
-import {
-  selectAuthorized,
-  selectAuthorizedUser,
-  selectIsVisibleLogout,
-} from '../redux/authorization/selectors';
-import { NavLink } from 'react-router-dom';
+import { selectAuthorizedUser, selectIsVisibleLogout } from '../redux/authorization/selectors';
 import { useTranslation } from 'react-i18next';
 
 const Account: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const isVisibleLogout = useSelector(selectIsVisibleLogout);
-  const authorized = useSelector(selectAuthorized);
   const authorizedUser = useSelector(selectAuthorizedUser);
+
+  const onClickLogout = () => {
+    dispatch(setLogout(false));
+  };
 
   React.useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -30,9 +28,8 @@ const Account: React.FC = () => {
 
   return (
     <div className="header__account">
-      <NavLink
+      <button
         className="header__account-user"
-        to=""
         onClick={() => dispatch(setIsVisibleLogout(!isVisibleLogout))}>
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -51,11 +48,11 @@ const Account: React.FC = () => {
           </g>
         </svg>
         <span className="header__account-login">{authorizedUser.login}</span>
-      </NavLink>
+      </button>
 
       <button
         className={isVisibleLogout ? 'header__account-logout show' : 'header__account-logout'}
-        onClick={() => dispatch(setLogout(!authorized))}
+        onClick={onClickLogout}
         type="button">
         {t('logout')}
       </button>

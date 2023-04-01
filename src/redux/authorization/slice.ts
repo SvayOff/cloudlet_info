@@ -96,6 +96,7 @@ const authorizationSlice = createSlice({
           state.authorizedUser = user;
 
           localStorage.setItem('authorizedUser', JSON.stringify(state.authorizedUser));
+          localStorage.setItem('authorized', JSON.stringify(state.authorized));
         }
       });
     },
@@ -117,6 +118,11 @@ const authorizationSlice = createSlice({
     },
 
     setLogout(state, action: PayloadAction<boolean>) {
+      state.authorized = action.payload;
+      localStorage.setItem('authorized', JSON.stringify(action.payload));
+    },
+
+    setAuthorized(state, action: PayloadAction<boolean>) {
       state.authorized = action.payload;
     },
 
@@ -144,5 +150,6 @@ export const {
   setLogout,
   setUsersBaseFromLS,
   setAuthorizedUserFromLS,
+  setAuthorized,
 } = authorizationSlice.actions;
 export default authorizationSlice.reducer;
