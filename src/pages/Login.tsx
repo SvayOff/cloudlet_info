@@ -10,6 +10,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { authLogin, authPassword, authorized, errorDataSignIn, isUserFounded } =
     useSelector(selectAuthorizationSlice);
+  const [isAnimate, setIsAnimate] = React.useState<boolean>(false);
   const { t } = useTranslation();
 
   const onClickAuthorization = () => {
@@ -30,8 +31,14 @@ const Login: React.FC = () => {
     }
   }, [authorized, navigate]);
 
+  React.useEffect(() => {
+    setIsAnimate(true);
+
+    return () => setIsAnimate(false);
+  }, []);
+
   return (
-    <section className="login">
+    <section className={isAnimate ? 'login animate' : 'login'}>
       <div className="login__title">{t('signIn')}</div>
       <form className="login__form">
         <div className="login__form-block">

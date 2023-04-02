@@ -13,8 +13,10 @@ import { NavLink } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
   const { registrLogin, registrPassword, registrEmail } = useSelector(selectAuthorizationSlice);
+  const [isAnimate, setIsAnimate] = React.useState<boolean>(false);
+
+  const { t } = useTranslation();
 
   const onClickRegistration = () => {
     dispatch(registration());
@@ -32,8 +34,14 @@ const Register: React.FC = () => {
     dispatch(setRegistrEmail(event.target.value));
   };
 
+  React.useEffect(() => {
+    setIsAnimate(true);
+
+    return () => setIsAnimate(false);
+  }, []);
+
   return (
-    <section className="register">
+    <section className={isAnimate ? 'register animate' : 'register'}>
       <div className="register__title">{t('titleReg')}</div>
       <form className="register__form">
         <div className="register__form-block">

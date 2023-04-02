@@ -7,9 +7,16 @@ import Empty from './Empty';
 
 const Weather: React.FC = () => {
   const weatherToday = useSelector(selectWeatherToday);
+  const [isAnimate, setIsAnimate] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setIsAnimate(true);
+
+    return () => setIsAnimate(false);
+  }, []);
 
   return (
-    <section className="weather">
+    <section className={isAnimate ? 'weather animate' : 'weather'}>
       {weatherToday ? (
         <>
           <WeatherTop />
