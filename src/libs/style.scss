@@ -1117,17 +1117,20 @@
   position: relative;
   left: 110%;
   opacity: 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
   width: 100%;
   transition: all 1s ease;
+  @include borderDark;
+  @include shadow;
+  padding: 20px;
+  border-radius: 30px;
   &.animate {
     left: 0;
     opacity: 1;
   }
   &__map {
     border-radius: 30%;
+    justify-self: stretch;
+    width: 100%;
   }
   &__title {
     margin-bottom: 10px;
@@ -1138,11 +1141,6 @@
     border-radius: 30px;
     @include borderDark;
     @include shadow;
-  }
-  .temperature {
-    justify-self: stretch;
-    width: 100%;
-    margin-top: 15px;
   }
 }
 
@@ -1623,6 +1621,8 @@ html {
 
     // maps
     .maps {
+      @include borderLight;
+      @include shadowLight;
       iframe {
         @include borderLight;
         @include shadowLight;

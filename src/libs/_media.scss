@@ -141,16 +141,7 @@
   }
   .maps {
     iframe {
-      height: 300px;
-    }
-    .clouds {
-      width: 100%;
-      margin-right: 0;
-    }
-    .sunshine {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 15px;
+      height: 400px;
     }
   }
 
@@ -348,6 +339,9 @@
 }
 
 @media (max-width: 400px) {
+  .header__form-input::placeholder {
+    font-size: 14px;
+  }
   .navigation__inner {
     display: block;
   }
@@ -418,7 +412,7 @@
   }
   .maps {
     iframe {
-      height: 230px;
+      height: 260px;
     }
   }
   .empty__img svg {
