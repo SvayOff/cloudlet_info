@@ -21,6 +21,7 @@ import {
   selectWeatherToday,
   selectWeatherDaily,
   selectWeatherFavorites,
+  selectStatus,
 } from './redux/weather/selectors';
 
 const router = createBrowserRouter([
@@ -65,12 +66,13 @@ const App: React.FC = () => {
   const weatherToday = useSelector(selectWeatherToday);
   const weatherDaily = useSelector(selectWeatherDaily);
   const weatherFavorites = useSelector(selectWeatherFavorites);
+  const status = useSelector(selectStatus);
   const isFavoriteAdded = React.useRef(false);
 
   React.useEffect(() => {
     const daily = JSON.parse(localStorage.getItem('daily') || 'null');
 
-    const locationJSON = localStorage.getItem('location');
+    const location = JSON.parse(localStorage.getItem('location') || 'null');
     const favorites = weatherFavorites && JSON.parse(localStorage.getItem('favorites') || 'null');
     const themeFromLS = localStorage.getItem('theme');
     const usersBase = JSON.parse(localStorage.getItem('usersBase') || 'null');
@@ -80,21 +82,20 @@ const App: React.FC = () => {
     if (daily) {
       dispatch(setWeatherDaily(daily));
     }
-    if (locationJSON !== undefined) {
-      const location = JSON.parse(locationJSON || 'null');
 
-      if (location) {
-        dispatch(setWeatherToday(location));
-      }
+    if (location) {
+      dispatch(setWeatherToday(location));
     }
 
     if (themeFromLS) {
       dispatch(setTheme(themeFromLS));
     }
+
     if (favorites) {
       dispatch(setWeatherFavoritesFromLS(favorites));
       isFavoriteAdded.current = true;
     }
+
     if (usersBase) {
       dispatch(setUsersBaseFromLS(usersBase));
     }
@@ -107,7 +108,9 @@ const App: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    localStorage.setItem('location', JSON.stringify(weatherToday));
+    if (status !== 'error') {
+      localStorage.setItem('location', JSON.stringify(weatherToday));
+    }
 
     localStorage.setItem('daily', JSON.stringify(weatherDaily));
 

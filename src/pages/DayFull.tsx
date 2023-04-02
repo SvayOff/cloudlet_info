@@ -23,9 +23,11 @@ const DayFull: React.FC = () => {
 
   const { t, i18n } = useTranslation();
 
-  if (!weatherToday) {
-    navigate('/');
-  }
+  React.useEffect(() => {
+    if (!weatherToday) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <section className="dayfull">
