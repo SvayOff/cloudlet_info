@@ -34,22 +34,30 @@ const Search: React.FC = () => {
     locationInput.current && locationInput.current.focus();
   };
 
+  const onClickSearch = () => {
+    fetchAndSetWeatherData();
+  };
+
   const searchLocation: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
-      dispatch(getWeatherData(urlWeatherDay)).then((res) => {
-        dispatch(setWeatherToday(res.payload));
-      });
-
-      axios.get(urlWeatherDeily).then((response) => {
-        dispatch(setWeatherDaily(response.data.list));
-      });
-
-      dispatch(setLocation(''));
-
-      locationInput.current && locationInput.current.blur();
-
-      navigate('/');
+      fetchAndSetWeatherData();
     }
+  };
+
+  const fetchAndSetWeatherData = () => {
+    dispatch(getWeatherData(urlWeatherDay)).then((res) => {
+      dispatch(setWeatherToday(res.payload));
+    });
+
+    axios.get(urlWeatherDeily).then((response) => {
+      dispatch(setWeatherDaily(response.data.list));
+    });
+
+    dispatch(setLocation(''));
+
+    locationInput.current && locationInput.current.blur();
+
+    navigate('/');
   };
 
   React.useEffect(() => {
@@ -68,23 +76,35 @@ const Search: React.FC = () => {
         value={location}
         placeholder={`${t('searchPlaceholder')}`}
       />
-      <div className="header__form-img">
-        <svg height={24} width={24} xmlns="http://www.w3.org/2000/svg">
-          <g
-            style={{
-              display: 'inline',
-            }}>
-            <path
-              d="M12 292.65c-4.723 0-8.572 3.853-8.572 8.579 0 .009 0 .018.002.027.105 3.813 2.17 6.371 4.687 8.164 2.275 1.62 3.088 2.805 3.088 2.805a1 1 0 0 0 1.713-.125c.677-1.011 1.955-2.06 2.898-2.686 2.698-1.771 4.756-4.374 4.756-8.186 0-4.725-3.85-8.578-8.572-8.578zm0 2a6.56 6.56 0 0 1 6.572 6.579c0 3.133-1.479 4.954-3.853 6.513-1.335.877-2.208 1.699-2.762 2.324a19.531 19.531 0 0 0-2.68-2.275c-2.232-1.59-3.755-3.436-3.847-6.574A6.56 6.56 0 0 1 12 294.65z"
-              transform="translate(0 -290.65)"
-            />
-            <path
-              d="M12 297.227c-2.198 0-4 1.803-4 4.002 0 2.198 1.802 4.003 4 4.003s4-1.805 4-4.003a4.016 4.016 0 0 0-4-4.002zm0 2c1.116 0 2 .883 2 2.002a1.987 1.987 0 0 1-2 2.003c-1.116 0-2-.885-2-2.003 0-1.12.884-2.002 2-2.002z"
-              transform="translate(0 -290.65)"
-            />
-          </g>
-        </svg>
-      </div>
+      {location.length ? (
+        <button className="header__form-search" onClick={onClickSearch} type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <g data-name="1">
+              <path d="M221.12 389.43a173.22 173.22 0 01-122.87-50.82c-67.75-67.75-67.75-178 0-245.74s178-67.75 245.74 0a173.69 173.69 0 01-122.87 296.56zm0-317.39a143.37 143.37 0 00-101.66 42c-56 56.06-56 147.26 0 203.32a143.77 143.77 0 10203.32-203.28A143.35 143.35 0 00221.12 72z"></path>
+              <path d="M221.12 332.16a116.42 116.42 0 1182.36-34.06 116.1 116.1 0 01-82.36 34.06zm0-202.86a86.44 86.44 0 1061.15 25.29 86.22 86.22 0 00-61.15-25.29zM414.82 450.44a40.78 40.78 0 01-29-12l-82.93-82.94a15 15 0 0121.22-21.22L407 417.21a11 11 0 1015.55-15.55l-82.93-82.93a15 15 0 1121.22-21.22l82.93 82.93a41 41 0 01-29 70z"></path>
+            </g>
+          </svg>
+        </button>
+      ) : (
+        <div className="header__form-img">
+          <svg height={24} width={24} xmlns="http://www.w3.org/2000/svg">
+            <g
+              style={{
+                display: 'inline',
+              }}>
+              <path
+                d="M12 292.65c-4.723 0-8.572 3.853-8.572 8.579 0 .009 0 .018.002.027.105 3.813 2.17 6.371 4.687 8.164 2.275 1.62 3.088 2.805 3.088 2.805a1 1 0 0 0 1.713-.125c.677-1.011 1.955-2.06 2.898-2.686 2.698-1.771 4.756-4.374 4.756-8.186 0-4.725-3.85-8.578-8.572-8.578zm0 2a6.56 6.56 0 0 1 6.572 6.579c0 3.133-1.479 4.954-3.853 6.513-1.335.877-2.208 1.699-2.762 2.324a19.531 19.531 0 0 0-2.68-2.275c-2.232-1.59-3.755-3.436-3.847-6.574A6.56 6.56 0 0 1 12 294.65z"
+                transform="translate(0 -290.65)"
+              />
+              <path
+                d="M12 297.227c-2.198 0-4 1.803-4 4.002 0 2.198 1.802 4.003 4 4.003s4-1.805 4-4.003a4.016 4.016 0 0 0-4-4.002zm0 2c1.116 0 2 .883 2 2.002a1.987 1.987 0 0 1-2 2.003c-1.116 0-2-.885-2-2.003 0-1.12.884-2.002 2-2.002z"
+                transform="translate(0 -290.65)"
+              />
+            </g>
+          </svg>
+        </div>
+      )}
+
       {location.length ? (
         <span onClick={onClickClear} className="header__form-clear">
           <svg

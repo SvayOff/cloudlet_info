@@ -63,6 +63,8 @@
   }
 
   &__form {
+    display: flex;
+    justify-items: center;
     position: relative;
     max-width: 300px;
     width: 100%;
@@ -80,7 +82,7 @@
       position: absolute;
       background-color: transparent;
       border: none;
-      top: 11px;
+      top: 12px;
       left: 9px;
       pointer-events: none;
       &:hover {
@@ -105,6 +107,7 @@
       }
       svg {
         width: 22px;
+        pointer-events: none;
       }
       path {
         fill: rgba($color: #000000, $alpha: 0.7);
@@ -112,6 +115,19 @@
       }
       ellipse {
         display: none;
+      }
+    }
+    &-search {
+      position: absolute;
+      border-radius: 50%;
+      background-color: transparent;
+      top: 12px;
+      left: 9px;
+      border: none;
+      cursor: pointer;
+      svg {
+        width: 25px;
+        pointer-events: none;
       }
     }
     &-list {
@@ -130,7 +146,7 @@
     &-place {
       @include borderDark;
       border-radius: 30px;
-      padding: 5px 10px;
+
       cursor: pointer;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -594,6 +610,7 @@
       align-items: center;
       margin-bottom: 10px;
       svg {
+        pointer-events: none;
         width: 25px;
         margin-right: 15px;
       }
@@ -602,6 +619,7 @@
       display: flex;
       align-items: center;
       svg {
+        pointer-events: none;
         margin-right: 15px;
       }
     }
