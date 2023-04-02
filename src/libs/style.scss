@@ -163,6 +163,7 @@
   }
 
   &__signin {
+    position: relative;
     @include borderDark;
     border-radius: 30px;
     padding: 10px;
@@ -177,7 +178,7 @@
   }
   &__account {
     position: relative;
-
+    opacity: 1;
     &-user {
       display: flex;
       align-items: center;
@@ -196,6 +197,7 @@
         background-color: #fff;
         transform: translateY(10px) rotateZ(10deg);
       }
+
       svg {
         width: 20px;
         fill: #000;
@@ -993,12 +995,19 @@
 
 // error
 .error {
+  position: relative;
   @include borderDark;
   @include shadow;
+  left: 110%;
   width: 100%;
   border-radius: 30px;
   padding: 20px;
   text-align: center;
+  transition: all 1s ease;
+  &.animate {
+    left: 0;
+    opacity: 1;
+  }
   &:hover {
     .error__images {
       transform: rotateY(360deg) scale(0.9);

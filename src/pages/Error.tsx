@@ -3,10 +3,17 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 const Error: React.FC = () => {
+  const [isAnimate, setIsAnimate] = React.useState<boolean>(false);
   const { t } = useTranslation();
 
+  React.useEffect(() => {
+    setIsAnimate(true);
+
+    return () => setIsAnimate(false);
+  });
+
   return (
-    <section className="error">
+    <section className={isAnimate ? 'error animate' : 'error'}>
       <div className="error__images">
         <img className="error__image" src="/images/icons/error.svg" alt="error" />
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
