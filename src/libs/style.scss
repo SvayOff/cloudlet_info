@@ -740,6 +740,9 @@
         border-right: 1px solid rgba($color: #000000, $alpha: 0.7);
         padding: 0 5px;
       }
+      &:-webkit-autofill {
+        transition: background-color 5000s ease-in-out 0s;
+      }
     }
     &-btn {
       padding: 10px;
