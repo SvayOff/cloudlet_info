@@ -19,15 +19,20 @@
   "ms": "m/s",
   "removeFromFavorites": "Remove From Favorites",
   "emptyText": "It's empty now. Find out what the weather is like in your area.",
-  "errorText": "SOMETHING WENT WRONG. TRY LATER!",
+  "errorText": "SOMETHING WENT WRONG. TRY LATER, OR ENTER THE CORRECT LOCATION!",
   "btnBack": "Go Back",
   "login": "Login",
   "password": "Password",
+  "logout": "Logout",
+  "loginError": "Enter the correct password.",
+  "loginIsFounded": "User with this login was not found, please Register.",
   "noacc": "Don't have an account? ",
   "haveacc": "Have an account? ",
   "register": "Register",
   "regSignIn": "Sign In",
   "createLogin": "Create Login",
   "createPassword": "Create Password",
-  "yourEmail": "Your Email"
+  "yourEmail": "Your Email",
+  "registerPopupTitle": "Registration was successful!",
+  "registerPopupDesc": "Thank you for being with us. Sign in to your account."
 }
