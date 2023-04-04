@@ -2,10 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRegistered } from '../redux/authorization/slice';
 import { selectRegistered } from '../redux/authorization/selectors';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const RegisterPopup: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const registered = useSelector(selectRegistered);
 
   const { t } = useTranslation();
@@ -14,6 +16,8 @@ const RegisterPopup: React.FC = () => {
     const popupOpenTimeout = setTimeout(() => {
       if (registered) {
         dispatch(setRegistered(false));
+
+        navigate('/login');
       }
     }, 3000);
 

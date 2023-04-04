@@ -40,6 +40,8 @@ const Register: React.FC = () => {
     return () => setIsAnimate(false);
   }, []);
 
+  React.useEffect(() => {});
+
   return (
     <section className={isAnimate ? 'register animate' : 'register'}>
       <div className="register__title">{t('titleReg')}</div>
